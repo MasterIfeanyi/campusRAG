@@ -48,6 +48,24 @@ const handler = NextAuth({
         },
         // build the session from that token - The session gets sent to the browser so your frontend code can know who's logged in and what they're allowed to see
         async session({ session, token }) {
+            const REVALIDATE_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+            const now = Date.now();
+            const shouldRevalidate = now - (token.lastChecked || 0) > REVALIDATE_INTERVAL_MS;
+
+            if (shouldRevalidate) {
+                await dbConnect();
+                const currentUser = await User.findById(token.id);
+
+                if (!currentUser || currentUser.status === "banned") {
+                    return null; // session killed, at most REVALIDATE_INTERVAL_MS after the ban
+                }
+
+                // Refresh cached values and reset the check timer
+                token.role = currentUser.role;
+                token.displayName = currentUser.displayName;
+                token.lastChecked = now;
+            }
+
             // store the details of the token in the session.
             session.user.id = token.id;
             session.user.displayName = token.displayName;
@@ -55,6 +73,7 @@ const handler = NextAuth({
             delete session.user.email; // never leak email into the client session
             delete session.user.name;
             delete session.user.image;
+
             return session;
         },
     },
