@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { embedText } from "@/lib/ai";
-import { getReviewsCollection } from "@/lib/mongodb";
+import { createReview } from "@/services/reviewService";
 
 export async function POST(req) {
   try {
@@ -13,42 +12,25 @@ export async function POST(req) {
       );
     }
 
-    let categoryList = [];
-    if (Array.isArray(categories)) {
-      categoryList = [...new Set(
-        categories
-          .filter((c) => typeof c === "string" && c.trim().length > 0)
-          .map((c) => c.trim().toLowerCase())
-      )];
-    } else if (typeof categories === "string" && categories.trim().length > 0) {
-      categoryList = [categories.trim().toLowerCase()];
-    }
-    if (categoryList.length === 0) {
-      categoryList = ["general"];
-    }
-
-    const textToEmbed = `${title || ""}\n${body}`.trim();
-    const embedding = await embedText(textToEmbed);
-
-    const reviews = await getReviewsCollection();
-
-    const result = await reviews.insertOne({
-      title: title || "",
-      body,
-      categories: categoryList,
-      author: author || "Anonymous",
-      embedding,
-      createdAt: new Date(),
-    });
+    const review = await createReview({ title, body, categories, author });
 
     return NextResponse.json({
       success: true,
-      id: result.insertedId,
+      id: review._id,
     });
   } catch (err) {
     console.error("Submit review error:", err);
+
+    // Mongoose validation errors are worth surfacing clearly
+    if (err.name === "ValidationError") {
+      return NextResponse.json(
+        { error: "Validation failed.", detail: err.message },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { error: "Internal server error.", detail: err.message },
+      { error: "Internal server error." },
       { status: 500 }
     );
   }
