@@ -5,8 +5,9 @@ import { submitReviewLimiter } from "@/helpers/rateLimiter";
 export async function POST(req) {
     try {
 
+        // 1. Rate limiting — protects our AI quota from being spammed
         const ip = req.headers.get("x-forwarded-for") || "unknown";
-        const { allowed } = submitReviewLimiter(ip);
+        const { allowed, remaining  } = submitReviewLimiter(ip);
 
         if (!allowed) {
             return NextResponse.json(
@@ -15,6 +16,7 @@ export async function POST(req) {
             );
         }
 
+        // 2. Check presence — routes only check presence, not quality
         const { title, body, categories, author } = await req.json();
 
         if (!body || body.trim().length === 0) {
@@ -24,12 +26,16 @@ export async function POST(req) {
             );
         }
 
+        // 3. call the service `createReview` (sanitizing, validating, embedding, saving) lives in the service
         const review = await createReview({ title, body, categories, author });
 
         return NextResponse.json({
             success: true,
             id: review._id,
-        });
+            remainingRequests: remaining,
+        },
+            { status: 201 }
+        );
     } catch (err) {
         console.error("Submit review error:", err);
 
