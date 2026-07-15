@@ -1,13 +1,23 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 import { createReview } from "@/services/reviewService";
 import { submitReviewLimiter } from "@/helpers/rateLimiter";
 
 export async function POST(req) {
     try {
 
+        const session = await getServerSession();
+
+        if (!session?.user?.id) {
+            return NextResponse.json(
+                { error: "You must be logged in to post a review." },
+                { status: 401 }
+            );
+        }
+
         // 1. Rate limiting — protects our AI quota from being spammed
         const ip = req.headers.get("x-forwarded-for") || "unknown";
-        const { allowed, remaining  } = submitReviewLimiter(ip);
+        const { allowed, remaining } = submitReviewLimiter(ip);
 
         if (!allowed) {
             return NextResponse.json(
@@ -17,9 +27,9 @@ export async function POST(req) {
         }
 
         // 2. Check presence — routes only check presence, not quality
-        const { title, body, categories, author } = await req.json();
+        const { title, body, categories } = await req.json();
 
-        if (!body || body.trim().length === 0) {
+        if (!body || typeof body !== "string" || body.trim().length === 0) {
             return NextResponse.json(
                 { error: "Review content is required." },
                 { status: 400 }
@@ -27,7 +37,7 @@ export async function POST(req) {
         }
 
         // 3. call the service `createReview` (sanitizing, validating, embedding, saving) lives in the service
-        const review = await createReview({ title, body, categories, author });
+        const review = await createReview({ title, body, categories, userId: session.user.id, });
 
         return NextResponse.json({
             success: true,

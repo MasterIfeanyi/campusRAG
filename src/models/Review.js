@@ -23,11 +23,10 @@ const ReviewSchema = new mongoose.Schema(
         message: "At least one category is required.",
       },
     },
-    author: {
-      type: String,
-      trim: true,
-      maxlength: [80, "Author name cannot exceed 80 characters."],
-      default: "Anonymous",
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "A review must be linked to a user."],
     },
     embedding: {
       type: [Number],
