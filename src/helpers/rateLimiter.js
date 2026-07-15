@@ -44,6 +44,6 @@ export function submitReviewLimiter(identifier) {
 
 // Limiter for asking a question — costs an embedding + a Gemma generation call
 export function askQuestionLimiter(identifier) {
-  return checkLimit(`ask-question:${identifier}`, { limit: 10, windowMs: 60 * 1000 }); // 10 per min
+  return checkLimit(`ask-question:${identifier}`, { limit: 5, windowMs: 60 * 1000 }); // 10 per min
 }
 
