@@ -50,11 +50,72 @@ export async function redeemInviteCode(code, userId) {
     throw err;
   }
 
+  const user = await User.findById(userId);
+  if (user.role === "superadmin") {
+    const err = new Error("Superadmin already has full access.");
+    err.name = "ValidationError";
+    throw err;
+  }
+
   invite.usedBy = userId;
   invite.usedAt = new Date();
   await invite.save();
 
-  const user = await User.findByIdAndUpdate(userId, { role: "admin" }, { new: true });
+  user.role = "admin";
+  await user.save();
 
   return { displayName: user.displayName, role: user.role };
+}
+
+
+export async function banUser(targetUserId, requestingUser) {
+  await dbConnect();
+
+  if (requestingUser.role !== "superadmin") {
+    const err = new Error("Only the superadmin can ban users.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  if (targetUserId === requestingUser.id) {
+    const err = new Error("You cannot ban yourself.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  const target = await User.findById(targetUserId);
+  if (!target) {
+    const err = new Error("User not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
+  target.status = "banned";
+  await target.save();
+
+  return { displayName: target.displayName, status: target.status };
+}
+
+export async function unbanUser(targetUserId, requestingUser) {
+  await dbConnect();
+
+  if (requestingUser.role !== "superadmin") {
+    const err = new Error("Only the superadmin can unban users.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  const target = await User.findByIdAndUpdate(
+    targetUserId,
+    { status: "active" },
+    { new: true }
+  );
+
+  if (!target) {
+    const err = new Error("User not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
+  return { displayName: target.displayName, status: target.status };
 }

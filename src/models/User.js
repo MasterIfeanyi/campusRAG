@@ -25,6 +25,11 @@ const UserSchema = new mongoose.Schema(
             enum: ["student", "admin", "superadmin"],
             default: "student",
         },
+        status: {
+            type: String,
+            enum: ["active", "banned"],
+            default: "active",
+        },
     },
     { timestamps: true }
 );

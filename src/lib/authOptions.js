@@ -21,7 +21,10 @@ const handler = NextAuth({
                 const isValid = await bcrypt.compare(credentials.password, user.password);
                 if (!isValid) return null;
 
-                // Only ever expose safe, non-identifying fields to the session
+                if (user.status === "banned") {
+                    return null; // NextAuth treats this the same as invalid credentials
+                }
+
                 return {
                     id: user._id.toString(),
                     displayName: user.displayName,
