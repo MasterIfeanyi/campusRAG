@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import Review from "@/models/Review";
 import { embedText } from "@/lib/ai";
-import { sanitizeText, normalizeCategories, validateTextLength } from "@/utils/sanitize";
+import { sanitizeText, normalizeCategories, validateTextLength } from "@/helpers/fn";
 
 export async function createReview({ title, body, categories, author }) {
   await dbConnect();

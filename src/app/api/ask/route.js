@@ -16,7 +16,7 @@ export async function POST(req) {
 
     const { question } = await req.json();
 
-    if (!question || typeof question !== "string" || question.trim().length === 0) {
+    if (!question || question.trim().length === 0) {
       return NextResponse.json(
         { error: "Question is required." },
         { status: 400 }
