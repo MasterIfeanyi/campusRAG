@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import Review from "@/models/Review";
 import { embedText, generateAnswer } from "@/lib/ai";
-import { validateTextLength } from "@/utils/sanitize";
+import { validateTextLength } from "@/helpers/fn";
 
 export async function askQuestion(question) {
   await dbConnect();
