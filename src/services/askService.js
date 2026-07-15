@@ -25,6 +25,7 @@ export async function askQuestion(question) {
         queryVector: questionEmbedding,
         numCandidates: 100,
         limit: 5,
+        filter: { status: "visible" },
       },
     },
     // show only certain fields and the relevance score
@@ -33,7 +34,6 @@ export async function askQuestion(question) {
         title: 1,
         body: 1,
         categories: 1,
-        author: 1,
         score: { $meta: "vectorSearchScore" },
       },
     },
