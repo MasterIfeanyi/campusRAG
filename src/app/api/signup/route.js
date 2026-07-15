@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
-import { generateAnonymousName } from "@/utils/generateAnonymousName";
-import { sanitizeText } from "@/utils/sanitize";
+import { generateUniqueAnonymousName } from "@/helpers/generateAnonymousName";
+import { sanitizeText } from "@/helpers/fn";
 
 export async function POST(req) {
   try {
@@ -32,7 +32,7 @@ export async function POST(req) {
     const user = await User.create({
       email: cleanEmail,
       password: hashedPassword,
-      displayName: generateAnonymousName(),
+      displayName: await generateUniqueAnonymousName(User),
     });
 
     return NextResponse.json(
