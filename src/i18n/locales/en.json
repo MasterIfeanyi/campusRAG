@@ -1,0 +1,164 @@
+{
+    "common": {
+        "submit": "Submit",
+        "cancel": "Cancel"
+    },
+    "form": {
+        "title": "Form Builder",
+        "create": "Create Form",
+        "name": "Form Name"
+    },
+    "actionMenu": {
+        "star": "Star",
+        "markUnread": "Mark as unread",
+        "rename": "Rename",
+        "addToProject": "Add to project",
+        "delete": "Delete"
+    },
+    "auth": {
+        "signIn": {
+            "title": "Log in",
+            "emailPlaceholder": "Email address or mobile number",
+            "passwordPlaceholder": "Password",
+            "loginButton": "Log in",
+            "forgotPassword": "Forgotten password?",
+            "createAccount": "Create new account"
+        },
+        "signUp": {
+            "title": "Get started on DeForm",
+            "subtitle": "Create an account to start building and sharing forms instantly.",
+            "nameLabel": "Name",
+            "firstNamePlaceholder": "First name",
+            "lastNamePlaceholder": "Surname",
+            "emailLabel": "Email address",
+            "emailPlaceholder": "example@email.com",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "Password",
+            "legalPrefix": "By tapping Submit, you agree to DeForm's",
+            "terms": "Terms",
+            "privacy": "Privacy Policy",
+            "legalAnd": "and",
+            "cookies": "Cookies Policy",
+            "alreadyHaveAccount": "I already have an account",
+            "errors": {
+                "firstNameRequired": "First name is required",
+                "lastNameRequired": "Surname is required",
+                "emailRequired": "Email is required",
+                "emailInvalid": "Enter a valid email address",
+                "passwordRequired": "Password is required",
+                "passwordMinLength": "Password must be at least 8 characters"
+            }
+        },
+        "landing": {
+            "nav": {
+                "logIn": "Log In",
+                "signUp": "Sign Up"
+            },
+            "hero": {
+                "title": "Create Forms in Seconds.",
+                "titleHighlight": "Share Instantly.",
+                "description": "Build beautiful forms, collect responses, and analyze results. No coding required. Open source and free forever.",
+                "ctaPrimary": "Start Building Free",
+                "ctaSecondary": "Learn More"
+            },
+            "footer": {
+                "copyright": "© 2026 DeForm. Open Source & Free Forever."
+            }
+        },
+        "verify": {
+            "title": "Verify your email",
+            "subtitle": "Enter the verification code sent to",
+            "codeLabel": "Verification code",
+            "codePlaceholder": "e.g. uZTzAL5h",
+            "verifyButton": "Verify email",
+            "noCode": "Didn't receive the code?",
+            "resend": "Resend code",
+            "resendIn": "Resend in {seconds}s",
+            "backToLogin": "Back to login",
+            "errors": {
+                "codeRequired": "Verification code is required",
+                "invalidCode": "Invalid or expired code"
+            }
+        }
+    },
+    "builder": {
+        "name": "DeForm Builder",
+        "tagline": "Production-grade form creator",
+        "actions": {
+            "copyHtml": "Copy HTML",
+            "export": "Export"
+        },
+        "fieldTypes": {
+            "title": "Field Types",
+            "description": "Click to add to canvas"
+        },
+        "settings": {
+            "title": "Form Settings",
+            "formTitle": "Form Title",
+            "formTitlePlaceholder": "e.g., Job Application Form",
+            "description": "Description",
+            "descriptionPlaceholder": "Brief description of your form"
+        },
+        "canvas": {
+            "title": "Form Fields",
+            "count": "{{count}} fields",
+            "emptyTitle": "No fields added yet",
+            "emptyDescription": "Click a field type on the left to add it",
+            "dropHere": "Drop file here",
+            "clickToUpload": "Click or drag to upload",
+            "maxSize": "Max {{size}}",
+            "uploading": "Uploading...",
+            "uploadSuccess": "Uploaded successfully",
+            "tryAgain": "Click to try again"
+        },
+        "preview": {
+            "title": "Live Preview",
+            "description": "See your form in real-time",
+            "defaultTitle": "Your Form Title",
+            "defaultDescription": "Your form description will appear here",
+            "empty": "Add fields to see them here"
+        }
+    },
+    "fieldTypes": {
+        "text": "Short Text",
+        "email": "Email",
+        "tel": "Phone Number",
+        "number": "Number",
+        "date": "Date",
+        "file": "File Upload",
+        "rating": "Rating",
+        "checkbox": "Checkbox"
+    },
+    "fields": {
+        "default": {
+            "text": {
+                "label": "Untitled Question",
+                "placeholder": "Type your answer here..."
+            },
+            "email": {
+                "label": "Email Address",
+                "placeholder": "example@email.com"
+            },
+            "tel": {
+                "label": "Phone Number",
+                "placeholder": "+1 (555) 000-0000"
+            },
+            "number": {
+                "label": "Number",
+                "placeholder": "0"
+            },
+            "date": {
+                "label": "Date"
+            },
+            "file": {
+                "label": "Upload File"
+            },
+            "rating": {
+                "label": "Rate your experience"
+            },
+            "checkbox": {
+                "label": "Select options"
+            }
+        }
+    }
+}
