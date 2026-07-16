@@ -3,11 +3,6 @@
         "submit": "Submit",
         "cancel": "Cancel"
     },
-    "form": {
-        "title": "Form Builder",
-        "create": "Create Form",
-        "name": "Form Name"
-    },
     "actionMenu": {
         "star": "Star",
         "markUnread": "Mark as unread",
@@ -25,8 +20,8 @@
             "createAccount": "Create new account"
         },
         "signUp": {
-            "title": "Get started on DeForm",
-            "subtitle": "Create an account to start building and sharing forms instantly.",
+            "title": "Get started",
+            "subtitle": "Create an account to start submitting and searching campus reviews.",
             "nameLabel": "Name",
             "firstNamePlaceholder": "First name",
             "lastNamePlaceholder": "Surname",
@@ -34,7 +29,7 @@
             "emailPlaceholder": "example@email.com",
             "passwordLabel": "Password",
             "passwordPlaceholder": "Password",
-            "legalPrefix": "By tapping Submit, you agree to DeForm's",
+            "legalPrefix": "By tapping Submit, you agree to our",
             "terms": "Terms",
             "privacy": "Privacy Policy",
             "legalAnd": "and",
@@ -55,14 +50,14 @@
                 "signUp": "Sign Up"
             },
             "hero": {
-                "title": "Create Forms in Seconds.",
-                "titleHighlight": "Share Instantly.",
-                "description": "Build beautiful forms, collect responses, and analyze results. No coding required. Open source and free forever.",
-                "ctaPrimary": "Start Building Free",
+                "title": "Ask about campus.",
+                "titleHighlight": "Get real answers.",
+                "description": "Search student-submitted reviews and reports about hostels, buildings, and campus life.",
+                "ctaPrimary": "Start Searching",
                 "ctaSecondary": "Learn More"
             },
             "footer": {
-                "copyright": "© 2026 DeForm. Open Source & Free Forever."
+                "copyright": "2026 LASU Campus RAG."
             }
         },
         "verify": {
@@ -81,84 +76,17 @@
             }
         }
     },
-    "builder": {
-        "name": "DeForm Builder",
-        "tagline": "Production-grade form creator",
-        "actions": {
-            "copyHtml": "Copy HTML",
-            "export": "Export"
-        },
-        "fieldTypes": {
-            "title": "Field Types",
-            "description": "Click to add to canvas"
-        },
-        "settings": {
-            "title": "Form Settings",
-            "formTitle": "Form Title",
-            "formTitlePlaceholder": "e.g., Job Application Form",
-            "description": "Description",
-            "descriptionPlaceholder": "Brief description of your form"
-        },
-        "canvas": {
-            "title": "Form Fields",
-            "count": "{{count}} fields",
-            "emptyTitle": "No fields added yet",
-            "emptyDescription": "Click a field type on the left to add it",
-            "dropHere": "Drop file here",
-            "clickToUpload": "Click or drag to upload",
-            "maxSize": "Max {{size}}",
-            "uploading": "Uploading...",
-            "uploadSuccess": "Uploaded successfully",
-            "tryAgain": "Click to try again"
-        },
-        "preview": {
-            "title": "Live Preview",
-            "description": "See your form in real-time",
-            "defaultTitle": "Your Form Title",
-            "defaultDescription": "Your form description will appear here",
-            "empty": "Add fields to see them here"
-        }
-    },
-    "fieldTypes": {
-        "text": "Short Text",
-        "email": "Email",
-        "tel": "Phone Number",
-        "number": "Number",
-        "date": "Date",
-        "file": "File Upload",
-        "rating": "Rating",
-        "checkbox": "Checkbox"
-    },
-    "fields": {
-        "default": {
-            "text": {
-                "label": "Untitled Question",
-                "placeholder": "Type your answer here..."
-            },
-            "email": {
-                "label": "Email Address",
-                "placeholder": "example@email.com"
-            },
-            "tel": {
-                "label": "Phone Number",
-                "placeholder": "+1 (555) 000-0000"
-            },
-            "number": {
-                "label": "Number",
-                "placeholder": "0"
-            },
-            "date": {
-                "label": "Date"
-            },
-            "file": {
-                "label": "Upload File"
-            },
-            "rating": {
-                "label": "Rate your experience"
-            },
-            "checkbox": {
-                "label": "Select options"
-            }
-        }
+    "reviews": {
+        "title": "Campus Reviews",
+        "searchPlaceholder": "Ask a question about campus...",
+        "submitTitle": "Submit a Review",
+        "reviewTitleLabel": "Title",
+        "reviewTitlePlaceholder": "e.g. Moremi Hall flooding",
+        "reviewBodyLabel": "Details",
+        "reviewBodyPlaceholder": "Describe what happened...",
+        "categoryLabel": "Category",
+        "submitButton": "Submit Review",
+        "noResults": "No matching reviews found",
+        "relevanceScore": "Relevance"
     }
 }
