@@ -37,3 +37,22 @@ export async function createReview({ title, body, categories, userId }) {
 
   return review;
 }
+
+export async function getReviews() {
+  await dbConnect();
+
+  const reviews = await Review.find({ status: "visible" })
+    .populate("userId", "displayName")
+    .sort({ createdAt: -1 })
+    .limit(50)
+    .lean();
+
+  return reviews.map((r) => ({
+    id: r._id,
+    title: r.title,
+    body: r.body,
+    categories: r.categories,
+    authorDisplayName: r.userId?.displayName || "Unknown",
+    createdAt: r.createdAt,
+  }));
+}

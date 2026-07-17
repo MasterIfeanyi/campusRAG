@@ -63,3 +63,8 @@ export async function POST(req) {
         );
     }
 }
+
+export async function GET() {
+  const reviews = await getReviews();
+  return NextResponse.json({ success: true, reviews });
+}
