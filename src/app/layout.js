@@ -3,7 +3,7 @@ import "./globals.css";
 import SessionProvider from './_components/SessionProvider'
 import { ThemeProvider } from "./_components/ThemeProvider"
 import NavbarLayout from "@/components/Navbar/NavbarLayout";
-
+import QueryProvider from "./_components/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
+          <QueryProvider>
           <ThemeProvider
             attribute="data-theme"
             defaultTheme="system"
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
               {children}
             </NavbarLayout>
           </ThemeProvider>
+          </QueryProvider>
         </SessionProvider>
         <div id="modal-root"></div>
       </body>

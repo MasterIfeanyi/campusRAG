@@ -5,8 +5,8 @@ import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import Icon from "@/icons/Icon";
-import Button from "../Button";
-import ActionMenu from "../ActionMenu/ActionMenu";
+import Button from "../ui/Button";
+import ActionMenu from "../ui/ActionMenu/ActionMenu";
 
 export default function MobileNavMenu() {
   const { status } = useSession();

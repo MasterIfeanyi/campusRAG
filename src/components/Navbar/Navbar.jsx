@@ -4,7 +4,7 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
-import Button from "../Button";
+import Button from "../ui/Button";
 import MobileNavMenu from "./MobileNavMenu";
 import Icon from "@/icons/Icon";
 
