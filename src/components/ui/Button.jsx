@@ -36,7 +36,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled || loading}
       type={type}
-      className={`bg-black 
+      className={`
             ${baseStyles}
             ${variantStyles[variant]}
             ${sizeStyles[size]}

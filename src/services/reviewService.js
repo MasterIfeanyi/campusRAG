@@ -13,6 +13,8 @@ export async function createReview({ title, body, categories, userId }) {
   }
 
   const bodyCheck = validateTextLength(body, { min: 10, max: 3000, fieldName: "Review body" });
+
+
   if (!bodyCheck.valid) {
     const err = new Error(bodyCheck.error);
     err.name = "ValidationError";
@@ -29,7 +31,7 @@ export async function createReview({ title, body, categories, userId }) {
     title: cleanTitle,
     body: bodyCheck.cleaned,
     categories: categoryList,
-    author: cleanAuthor,
+    userId,
     embedding,
   });
 

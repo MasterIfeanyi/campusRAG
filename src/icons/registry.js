@@ -20,11 +20,15 @@ import {
   FiEdit2, 
   FiTrash2, 
   FiShare2,
-  FiFolderPlus
+  FiFolderPlus,
+  FiLogIn,
+  FiSun,
+  FiMoon,
+  FiSearch,
 } from "react-icons/fi";
 
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { HiDocumentText } from 'react-icons/hi2';
+import { HiDocumentText, HiSparkles  } from 'react-icons/hi2';
 
 
 export const icons = {
@@ -53,4 +57,10 @@ export const icons = {
   trash: FiTrash2,
   share: FiShare2,
   addToProject: FiFolderPlus,
+  logout: FiLogOut,
+  login: FiLogIn,
+  sun: FiSun,
+  moon: FiMoon,
+  search: FiSearch,
+  sparkles: HiSparkles,
 };
