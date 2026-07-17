@@ -8,10 +8,11 @@ import Link from "next/link";
 import Image from "next/image";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
+import { useTranslate } from "@/hooks/useTranslate";
 import MobileNavMenu from "./MobileNavMenu";
 import Icon from "@/icons/Icon";
 import { useFeedStore } from "@/store/useFeedStore";
-import { useAskQuestion } from "@/hooks/useAskQuestion";
+import { useAskQuestion } from "@/hooks/useReviewQueries";
 
 export default function Navbar() {
     const { data: session, status } = useSession();
@@ -23,6 +24,7 @@ export default function Navbar() {
     const { mutate: askQuestion, isPending } = useAskQuestion();
 
     const [question, setQuestion] = useState("");
+    const dictionary = useTranslate();
 
     function handleAsk(q) {
         if (!q.trim()) return;
@@ -97,12 +99,12 @@ export default function Navbar() {
                     <>
                         <Link href="/signup">
                             <Button variant="secondary" size="medium" className="rounded-full">
-                                Sign up
+                                {dictionary.auth.landing.nav.signUp}
                             </Button>
                         </Link>
                         <Link href="/login">
                             <Button variant="primary" size="medium" className="rounded-full">
-                                Log in
+                                {dictionary.auth.landing.nav.logIn}
                             </Button>
                         </Link>
                     </>
