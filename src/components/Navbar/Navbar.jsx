@@ -41,7 +41,7 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-border bg-background">
+        <nav className="sticky top-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 border-b border-border bg-background">
             <Link href="/" className="flex gap-1 items-center shrink-0">
                 <Image
                     src="/images/gist-logo.png"
@@ -52,7 +52,7 @@ export default function Navbar() {
             </Link>
 
             <div className="flex-1 max-w-md mx-4 md:mx-8">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full gradient-border">
                     <Icon name="search" size={16} className="text-muted-foreground shrink-0" />
                     <Input
                         id="navbar-search"

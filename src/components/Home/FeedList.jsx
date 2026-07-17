@@ -11,7 +11,8 @@ export default function FeedList() {
   const router = useRouter();
 
   if (isLoading) return <LoadingIndicator text="Loading stories" />;
-  if (isError) return <p className="text-red-500 p-6">Could not load stories. Try refreshing.</p>;
+  if (isError) return <p className="text-red-500 py-6 text-center">Could not load stories. Try refreshing.</p>;
+  if (!reviews?.length) return <p className="text-gray-400 py-6">No stories yet. Be the first to share one.</p>;
 
   return (
     <div className="divide-y divide-gray-100">
@@ -26,10 +27,16 @@ function StoryCard({ review, requireAuth, router }) {
   const openStory = requireAuth(() => router.push(`/reviews/${review.id}`));
 
   return (
-    <div onClick={openStory} className="py-4 px-6 cursor-pointer hover:bg-gray-50">
-      <p className="text-xs text-gray-400">{review.authorDisplayName}</p>
-      <h3 className="font-semibold text-gray-900">{review.title}</h3>
-      <p className="text-gray-600 text-sm line-clamp-3 mt-1">{review.body}</p>
+    <div onClick={openStory} className="py-5 cursor-pointer group">
+      <div className="flex items-start justify-between">
+        <p className="text-xs text-gray-400">{review.authorDisplayName}</p>
+      </div>
+      <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-green-600 transition-colors">
+        {review.title}
+      </h3>
+      <p className="text-gray-500 text-sm mt-1.5 line-clamp-4 leading-relaxed">
+        {review.body}
+      </p>
     </div>
   );
 }

@@ -11,7 +11,7 @@
   --card-foreground: oklch(0.145 0.007 285);
 
   /* Primary */
-  --primary: oklch(0.485 0.105 185); /* teal */
+  --primary: oklch(72.3% 0.219 149.579); /* teal */
   --primary-foreground: oklch(1 0 0); /* white */
 
   /* Muted */
@@ -186,6 +186,13 @@ p {
 
 .animate-slideInRight {
   animation: slideInRight 0.3s ease-out;
+}
+
+.gradient-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(90deg, var(--primary), var(--ring)) border-box;
 }
 
 .contributors-mask {

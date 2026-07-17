@@ -11,6 +11,7 @@ export default function QueryProvider({ children }) {
           queries: {
             staleTime: 60 * 1000, // data considered fresh for 1 minute, avoids refetch spam
             retry: 1,
+            refetchOnWindowFocus: false,
           },
         },
       })
