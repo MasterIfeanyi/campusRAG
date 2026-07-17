@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { createReview } from "@/services/reviewService";
+import { createReview, getReviews } from "@/services/reviewService";
 import { submitReviewLimiter } from "@/helpers/rateLimiter";
 
 export async function POST(req) {

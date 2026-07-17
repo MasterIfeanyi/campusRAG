@@ -18,10 +18,10 @@ export default function JoinPromoCard() {
   if (status === "authenticated") return null;
 
   return (
-    <div className="hidden:md rounded-2xl overflow-hidden bg-zinc-900 text-white p-6 flex flex-col justify-between min-h-[340px] bg-[url('/promo-bg.jpg')] bg-cover bg-center">
+    <div className="hidden:md rounded-2xl overflow-hidden bg-zinc-900 text-white p-6 flex flex-col justify-between min-h-[340px] bg-[url('/people-laughing.jpg')] bg-cover bg-center">
       <div className="bg-black/50 -m-6 p-6 rounded-2xl flex flex-col justify-between h-full">
         <div>
-          <h2 className="text-xl font-semibold leading-snug mb-4">
+          <h2 className="text-xl text-white font-semibold leading-snug mb-4">
             Join the most <span className="text-green-400">real place</span> on the internet
           </h2>
           <ul className="space-y-2 text-sm text-zinc-200">
