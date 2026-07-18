@@ -8,7 +8,7 @@ import { useTranslate } from "@/hooks/useTranslate";
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import ActionMenu from "@/components/ui/ActionMenu/ActionMenu";
 import ReportModal from "@/components/Flag/ReportModal";
-import MascotState from "@/components/ui/MascotState";
+import MascotState from "@/components/ui/Mascot/Mascot";
 
 export default function FeedList() {
   const { data: reviews, isLoading, isError } = useReviews();

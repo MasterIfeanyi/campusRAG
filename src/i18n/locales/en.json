@@ -3,6 +3,11 @@
         "submit": "Submit",
         "cancel": "Cancel"
     },
+    "errorBoundary": {
+        "title": "Something went wrong",
+        "message": "Please refresh the page and try again.",
+        "refresh": "Refresh"
+    },
     "mascotStates": {
         "loadError": {
             "title": "Something went wrong",

@@ -1,6 +1,7 @@
 import FeedArea from "./FeedArea";
 import JoinPromoCard from "./JoinPromoCard";
 import SourcesPanel from "./SourcesPanel";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 export default function Home() {
   return (
@@ -13,7 +14,9 @@ export default function Home() {
       {/* Center: page routing / home feed, independent scroll */}
       <main className="overflow-y-auto h-full py-8">
         <div className="max-w-150 mx-auto">
-          <FeedArea />
+          <ErrorBoundary>
+            <FeedArea />
+          </ErrorBoundary>
         </div>
       </main>
 

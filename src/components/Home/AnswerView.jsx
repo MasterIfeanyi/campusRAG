@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 import SourcesPanel from "./SourcesPanel";
 import Icon from "@/icons/Icon"
 import { useTranslate } from "@/hooks/useTranslate";
-import MascotState from "@/components/ui/MascotState";
+import MascotState from "@/components/ui/Mascot/Mascot";
 
 
 
@@ -35,7 +35,7 @@ export default function AnswerView({ isAsking, askError }) {
           message={dictionary.mascotStates.askError.message}
         />
       )}
-      
+
       {!isAsking && answer && <p className="text-gray-800 leading-relaxed">{answer}</p>}
 
       {/* Inline sources, only shown below the lg breakpoint where the sidebar is hidden */}
