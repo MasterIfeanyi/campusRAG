@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
 import { flagReview } from "@/services/flagService";
 import { apiLimiter } from "@/helpers/rateLimit";
 
 export async function POST(req, { params }) {
     try {
-        const session = await getServerSession(authOptions);
+        const session = await getServerSession();
 
         if (!session?.user?.id) {
             return NextResponse.json(

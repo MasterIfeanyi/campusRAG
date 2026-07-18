@@ -47,15 +47,16 @@
     "auth": {
         "signIn": {
             "title": "Log in",
-            "emailPlaceholder": "Email address or mobile number",
+            "emailPlaceholder": "Email address",
             "passwordPlaceholder": "Password",
             "loginButton": "Log in",
             "forgotPassword": "Forgotten password?",
-            "createAccount": "Create new account"
+            "createAccount": "Create Account"
         },
         "signUp": {
             "title": "Get started",
             "subtitle": "Create an account to start submitting and searching campus reviews.",
+            "signUpButton": "Sign up",
             "nameLabel": "Name",
             "firstNamePlaceholder": "First name",
             "lastNamePlaceholder": "Surname",

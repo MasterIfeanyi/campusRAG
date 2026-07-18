@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { createReview, getReviews } from "@/services/reviewService";
 import { submitReviewLimiter } from "@/helpers/rateLimiter";
+import { authOptions } from "@/lib/authOptions";
 
 export async function POST(req) {
     try {
 
-        const session = await getServerSession();
+        const session = await getServerSession(authOptions);
 
         if (!session?.user?.id) {
             return NextResponse.json(
