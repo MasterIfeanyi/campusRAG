@@ -19,7 +19,7 @@ const Modal = ({isShown, children, onClose}) => {
     }, [isShown, onClose])
 
     const modal = (
-        <div className="fixed w-full h-full inset-0 top-16 overflow-y-auto z-40 bg-black/70 backdrop-blur-sm animate-fadeIn" onClick={(e) => {
+        <div className="fixed w-full h-full inset-0 top-16 overflow-y-auto z-40 bg-black/70 backdrop-blur-sm animate-fadeIn p-6" onClick={(e) => {
             if (e.target === e.currentTarget && onClose) {
                 onClose();
             }

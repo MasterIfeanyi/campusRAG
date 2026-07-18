@@ -35,6 +35,7 @@
     },
     "promoCard": {
         "title": "Join the most *real place* on the internet",
+        "welcomeTitle": "Welcome to the most *real place* on the internet",
         "features": [
             "Ask questions in plain language",
             "Searchable knowledge base",

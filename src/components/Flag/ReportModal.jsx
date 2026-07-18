@@ -56,7 +56,7 @@ export default function ReportModal({ isShown, onClose, reviewId }) {
                     className="bg-white rounded-2xl w-full max-w-md p-6 shadow-lg"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-3">
                         <h2 className="text-lg font-semibold text-foreground">{t.title}</h2>
                         <Button
                             type="button"
@@ -67,7 +67,7 @@ export default function ReportModal({ isShown, onClose, reviewId }) {
                         />
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-1">
                         {REASON_KEYS.map((key) => (
                             <label
                                 key={key}
@@ -75,14 +75,13 @@ export default function ReportModal({ isShown, onClose, reviewId }) {
                                 className="flex items-center justify-between py-3 cursor-pointer"
                             >
                                 <span className="text-base text-foreground">{t.reasons[key]}</span>
-                                <Input
+                                <input
                                     id={`report-reason-${key}`}
                                     type="radio"
                                     name="report-reason"
                                     value={key}
                                     checked={selectedReason === key}
                                     onChange={() => setSelectedReason(key)}
-                                    bare
                                     className="w-5 h-5 accent-[var(--primary)] cursor-pointer"
                                 />
                             </label>
@@ -96,7 +95,7 @@ export default function ReportModal({ isShown, onClose, reviewId }) {
                             onChange={(e) => setDetail(e.target.value)}
                             placeholder={isOther ? t.detailPlaceholderOther : t.detailPlaceholder}
                             rows={3}
-                            className="rounded-lg"
+                            className="rounded-3xl border-primary/30 focus:border-primary focus:ring-primary/30 px-5 py-4 resize-none h-22 max-w-full"
                         />
                     )}
 

@@ -32,10 +32,12 @@ function StoryCard({ review, requireAuth, router }) {
   const [isReportOpen, setIsReportOpen] = useState(false);
   const openStory = requireAuth(() => router.push(`/reviews/${review.id}`));
 
-  const handleReport = requireAuth(() => setIsReportOpen(true));
+  // const handleReport = requireAuth(() => setIsReportOpen(true));
+
+  const handleReport = () => setIsReportOpen(true);
 
   return (
-    <div onClick={openStory} className="py-5 cursor-pointer group">
+    <div onClick={openStory} className="py-5 px-1 cursor-pointer group">
       <div className="flex items-start justify-between">
         <p className="text-xs text-gray-400">{review.authorDisplayName}</p>
 
