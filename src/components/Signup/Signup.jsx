@@ -61,7 +61,7 @@ export default function SignupPage() {
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       <div className="relative hidden md:block">
         <Image
-          src="/images/welcome-hero.jpg"
+          src="/images/hero.jpg"
           alt=""
           fill
           className="object-cover"

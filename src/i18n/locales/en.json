@@ -3,6 +3,20 @@
         "submit": "Submit",
         "cancel": "Cancel"
     },
+    "mascotStates": {
+        "loadError": {
+            "title": "Something went wrong",
+            "message": "Could not load stories. Try refreshing."
+        },
+        "emptyFeed": {
+            "title": "No stories yet",
+            "message": "Be the first to share one."
+        },
+        "askError": {
+            "title": "Something went wrong",
+            "message": "We couldn't get an answer. Please try again."
+        }
+    },
     "report": {
         "title": "Report this story",
         "subtitle": "Help us understand what's wrong with this post.",

@@ -5,10 +5,14 @@ import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import Button from "../ui/Button";
 import SourcesPanel from "./SourcesPanel";
 import Icon from "@/icons/Icon"
+import { useTranslate } from "@/hooks/useTranslate";
+import MascotState from "@/components/ui/MascotState";
+
 
 
 export default function AnswerView({ isAsking, askError }) {
   const { question, answer, backToFeed } = useFeedStore();
+  const dictionary = useTranslate();
 
   return (
     <div className="py-1 px-6">
@@ -24,7 +28,14 @@ export default function AnswerView({ isAsking, askError }) {
       <p className="text-sm text-gray-500 mb-2">{question}</p>
 
       {isAsking && <LoadingIndicator text="Thinking" />}
-      {askError && <p className="text-red-500">{askError}</p>}
+
+      {askError && (
+        <MascotState
+          title={dictionary.mascotStates.askError.title}
+          message={dictionary.mascotStates.askError.message}
+        />
+      )}
+      
       {!isAsking && answer && <p className="text-gray-800 leading-relaxed">{answer}</p>}
 
       {/* Inline sources, only shown below the lg breakpoint where the sidebar is hidden */}

@@ -8,15 +8,25 @@ import { useTranslate } from "@/hooks/useTranslate";
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import ActionMenu from "@/components/ui/ActionMenu/ActionMenu";
 import ReportModal from "@/components/Flag/ReportModal";
+import MascotState from "@/components/ui/MascotState";
 
 export default function FeedList() {
   const { data: reviews, isLoading, isError } = useReviews();
   const { requireAuth } = useRequireAuth();
   const router = useRouter();
+  const dictionary = useTranslate();
 
   if (isLoading) return <LoadingIndicator text="Loading stories" />;
-  if (isError) return <p className="text-red-500 py-6 text-center">Could not load stories. Try refreshing.</p>;
-  if (!reviews?.length) return <p className="text-gray-400 py-6">No stories yet. Be the first to share one.</p>;
+
+  if (isError) {
+    const t = dictionary.mascotStates.loadError;
+    return <MascotState title={t.title} message={t.message} />;
+  }
+
+  if (!reviews?.length) {
+    const t = dictionary.mascotStates.emptyFeed;
+    return <MascotState title={t.title} message={t.message} />;
+  }
 
   return (
     <div className="divide-y divide-gray-100">
