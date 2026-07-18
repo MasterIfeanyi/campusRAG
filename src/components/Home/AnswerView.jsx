@@ -4,6 +4,7 @@ import { useFeedStore } from "@/store/useFeedStore";
 import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import Button from "../ui/Button";
 import SourcesPanel from "./SourcesPanel";
+import Icon from "@/icons/Icon"
 
 
 export default function AnswerView({ isAsking, askError }) {
@@ -11,8 +12,14 @@ export default function AnswerView({ isAsking, askError }) {
 
   return (
     <div className="py-1 px-6">
-      <Button bare onClick={backToFeed} className="text-sm text-gray-400 mb-4">
-        ← Back
+      <Button
+        type="button"
+        bare
+        onClick={backToFeed}
+        icon={<Icon name="back" size={16} className="text-gray-400" />}
+        className="mb-4"
+      >
+        <span className="text-sm text-gray-400">Back</span>
       </Button>
       <p className="text-sm text-gray-500 mb-2">{question}</p>
 
