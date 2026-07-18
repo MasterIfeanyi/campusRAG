@@ -93,7 +93,7 @@ export default function Navbar() {
                             {session.user?.displayName}
                         </span>
                         <Button variant="neutral" size="medium" className="rounded-full" onClick={() => signOut()}>
-                            Log out
+                            {dictionary.auth.landing.nav.logOut}
                         </Button>
                     </div>
                 ) : (

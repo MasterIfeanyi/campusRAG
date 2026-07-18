@@ -57,7 +57,8 @@
         "landing": {
             "nav": {
                 "logIn": "Log In",
-                "signUp": "Sign Up"
+                "signUp": "Sign Up",
+                "logOut": "Log Out"
             },
             "hero": {
                 "title": "Ask about campus.",
