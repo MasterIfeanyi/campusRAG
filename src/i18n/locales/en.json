@@ -3,12 +3,35 @@
         "submit": "Submit",
         "cancel": "Cancel"
     },
+    "report": {
+        "title": "Report this story",
+        "subtitle": "Help us understand what's wrong with this post.",
+        "reasons": {
+            "spam": "Spam",
+            "hate_speech": "Hate speech",
+            "impersonation": "Impersonation",
+            "false_accusations": "False accusations",
+            "harassment": "Harassment",
+            "other": "Other"
+        },
+        "detailPlaceholder": "Add more detail (optional)",
+        "detailPlaceholderOther": "Please describe the issue",
+        "submit": "Submit report",
+        "submitting": "Submitting...",
+        "success": "Thanks, your report has been submitted.",
+        "cancel": "Cancel"
+    },
+    "sourcePanel": {
+        "basedOnStory": "Based on {count} story",
+        "basedOnStories": "Based on {count} stories"
+    },
     "actionMenu": {
         "star": "Star",
         "markUnread": "Mark as unread",
         "rename": "Rename",
         "addToProject": "Add to project",
-        "delete": "Delete"
+        "delete": "Delete",
+        "report": "Report"
     },
     "promoCard": {
         "title": "Join the most *real place* on the internet",

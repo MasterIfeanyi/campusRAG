@@ -2,7 +2,21 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+
+
 // ---- Fetch functions (kept separate from the hooks for clarity) ----
+
+async function flagReview({ reviewId, reasonCategory, reasonDetail }) {
+    const res = await fetch(`/api/reviews/${reviewId}/flag`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reasonCategory, reasonDetail }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Something went wrong.");
+    return data;
+}
+
 
 async function fetchReviews() {
     const res = await fetch("/api/reviews");
@@ -34,6 +48,15 @@ export function useReviews() {
 export function useAskQuestion() {
     return useMutation({
         mutationFn: postQuestion,
+        onError: (error) => {
+            toast.error(error.message);
+        },
+    });
+}
+
+export function useFlagReview() {
+    return useMutation({
+        mutationFn: flagReview,
         onError: (error) => {
             toast.error(error.message);
         },
