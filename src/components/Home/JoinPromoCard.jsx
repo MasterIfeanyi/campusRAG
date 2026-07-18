@@ -15,7 +15,7 @@ export default function JoinPromoCard() {
   if (status === "authenticated") return null;
 
   return (
-    <div className="relative rounded-2xl overflow-hidden min-h-[340px]">
+    <div className="relative rounded-2xl overflow-hidden min-h-85">
       {/* Background image layer */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
@@ -29,7 +29,7 @@ export default function JoinPromoCard() {
       />
 
       {/* Content layer */}
-      <div className="relative z-10 p-6 flex flex-col justify-between h-full min-h-[340px]">
+      <div className="relative z-10 p-6 flex flex-col justify-between h-full min-h-85">
         <div>
           <h2
             className="text-xl font-semibold leading-snug mb-4"

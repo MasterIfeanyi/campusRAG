@@ -12,7 +12,7 @@ export default function Home() {
 
       {/* Center: page routing / home feed, independent scroll */}
       <main className="overflow-y-auto h-full py-8">
-        <div className="max-w-[600px] mx-auto">
+        <div className="max-w-150 mx-auto">
           <FeedArea />
         </div>
       </main>
