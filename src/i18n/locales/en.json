@@ -10,6 +10,16 @@
         "addToProject": "Add to project",
         "delete": "Delete"
     },
+    "promoCard": {
+        "title": "Join the most *real place* on the internet",
+        "features": [
+            "Ask questions in plain language",
+            "Searchable knowledge base",
+            "Admin moderation",
+            "Real people, verified experiences"
+        ],
+        "signUpButton": "Sign up"
+    },
     "auth": {
         "signIn": {
             "title": "Log in",

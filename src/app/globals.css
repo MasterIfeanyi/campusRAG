@@ -7,20 +7,40 @@
   --foreground: #171717;
 
   /* Card */
-  --card: oklch(1 0 0); /* white */
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0.007 285);
 
   /* Primary */
-  --primary: oklch(72.3% 0.219 149.579); /* teal */
-  --primary-foreground: oklch(1 0 0); /* white */
+  --primary: oklch(72.3% 0.219 149.579);
+  --primary-dark: oklch(58% 0.19 149.579);      /* NEW: hover/active state */
+  --primary-light: oklch(85% 0.15 149.579);     /* NEW: subtle bg tints, badges */
+  --primary-foreground: oklch(1 0 0);
 
   /* Muted */
-  --muted: oklch(0.95 0.002 285); /* grey */
+  --muted: oklch(0.95 0.002 285);
   --muted-foreground: oklch(0.485 0.012 275);
+  --muted-on-dark: oklch(0.85 0.005 285);            /* NEW: body text over photos/dark overlays */
+  --muted-foreground-on-dark: oklch(0.65 0.01 285);  /* NEW: secondary/dim text over dark overlays */
 
   /* Destructive */
-  --destructive: oklch(0.605 0.235 25); /* danger red */
+  --destructive: oklch(0.605 0.235 25);
+  --destructive-dark: oklch(0.5 0.22 25);       /* NEW: hover state */
   --destructive-foreground: oklch(1 0 0);
+
+  /* Success */
+  --success: oklch(0.72 0.19 149.579);          /* NEW */
+  --success-dark: oklch(0.58 0.17 149.579);     /* NEW */
+  --success-foreground: oklch(1 0 0);           /* NEW */
+
+  /* Warning */
+  --warning: oklch(0.8 0.17 85);                /* NEW */
+  --warning-dark: oklch(0.65 0.16 85);          /* NEW */
+  --warning-foreground: oklch(0.2 0.02 85);     /* NEW: dark text reads better on warning yellow */
+
+  /* Info */
+  --info: oklch(0.65 0.15 235);                 /* NEW */
+  --info-dark: oklch(0.52 0.14 235);            /* NEW */
+  --info-foreground: oklch(1 0 0);              /* NEW */
 
   /* Border & Input */
   --border: oklch(0.9 0.002 285);
@@ -28,14 +48,19 @@
   --ring: oklch(0.485 0.105 185);
 
   /* Accent */
-  --accent: oklch(0.95 0.025 155); /* green accent */
+  --accent: oklch(0.95 0.025 155);
   --accent-foreground: oklch(0.485 0.105 185);
+
+  /* Overlay / scrim */
+  --overlay: oklch(0 0 0 / 0.55);               /* NEW: image/photo card overlays */
+  --overlay-light: oklch(0 0 0 / 0.3);          /* NEW: subtler scrim */
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --primary: oklch(0.55 0.12 185); /* Slightly brighter teal for dark mode */
+  --primary: oklch(0.55 0.12 185);
+  --primary-dark: oklch(0.45 0.11 185);         /* NEW */
   --muted: oklch(0.25 0.01 285);
   --border: oklch(0.3 0.01 285);
 }
@@ -51,22 +76,40 @@
   --color-card-foreground: var(--card-foreground);
 
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);       /* NEW */
+  --color-primary-light: var(--primary-light);     /* NEW */
   --color-primary-foreground: var(--primary-foreground);
 
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-muted-on-dark: var(--muted-on-dark);                       /* NEW */
+  --color-muted-foreground-on-dark: var(--muted-foreground-on-dark); /* NEW */
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
   --color-destructive: var(--destructive);
+  --color-destructive-dark: var(--destructive-dark);   /* NEW */
   --color-destructive-foreground: var(--destructive-foreground);
 
+  --color-success: var(--success);                     /* NEW */
+  --color-success-dark: var(--success-dark);           /* NEW */
+  --color-success-foreground: var(--success-foreground); /* NEW */
+
+  --color-warning: var(--warning);                     /* NEW */
+  --color-warning-dark: var(--warning-dark);           /* NEW */
+  --color-warning-foreground: var(--warning-foreground); /* NEW */
+
+  --color-info: var(--info);                           /* NEW */
+  --color-info-dark: var(--info-dark);                 /* NEW */
+  --color-info-foreground: var(--info-foreground);     /* NEW */
+
   --color-border: var(--border);
-
   --color-input: var(--input);
-
   --color-ring: var(--ring);
+
+  --color-overlay: var(--overlay);           /* NEW */
+  --color-overlay-light: var(--overlay-light); /* NEW */
 }
 
 /* Dark Mode Theme */
@@ -79,16 +122,36 @@
   --card-foreground: oklch(0.96 0.002 285);
 
   /* Primary */
-  --primary: oklch(0.65 0.145 185); /* brighter teal for dark mode */
+  --primary: oklch(0.65 0.145 185);
+  --primary-dark: oklch(0.52 0.13 185);         /* NEW */
+  --primary-light: oklch(0.75 0.12 185);        /* NEW */
   --primary-foreground: oklch(0.98 0 0);
 
   /* Muted */
   --muted: oklch(0.22 0.01 285);
   --muted-foreground: oklch(0.75 0.012 275);
+  --muted-on-dark: oklch(0.85 0.005 285);            /* NEW: same tokens work regardless of theme */
+  --muted-foreground-on-dark: oklch(0.65 0.01 285);  /* NEW */
 
   /* Destructive */
   --destructive: oklch(0.72 0.22 25);
+  --destructive-dark: oklch(0.6 0.2 25);        /* NEW */
   --destructive-foreground: oklch(0.98 0.002 285);
+
+  /* Success */
+  --success: oklch(0.65 0.17 149.579);          /* NEW */
+  --success-dark: oklch(0.52 0.15 149.579);     /* NEW */
+  --success-foreground: oklch(1 0 0);           /* NEW */
+
+  /* Warning */
+  --warning: oklch(0.75 0.16 85);               /* NEW */
+  --warning-dark: oklch(0.6 0.15 85);           /* NEW */
+  --warning-foreground: oklch(0.15 0.02 85);    /* NEW */
+
+  /* Info */
+  --info: oklch(0.6 0.14 235);                  /* NEW */
+  --info-dark: oklch(0.48 0.13 235);            /* NEW */
+  --info-foreground: oklch(1 0 0);              /* NEW */
 
   /* Border & Input */
   --border: oklch(0.28 0.01 285);
@@ -98,6 +161,10 @@
   /* Accent */
   --accent: oklch(0.28 0.025 155);
   --accent-foreground: oklch(0.65 0.145 185);
+
+  /* Overlay / scrim */
+  --overlay: oklch(0 0 0 / 0.6);                /* NEW: slightly stronger since bg is already dark */
+  --overlay-light: oklch(0 0 0 / 0.35);         /* NEW */
 }
 
 html {

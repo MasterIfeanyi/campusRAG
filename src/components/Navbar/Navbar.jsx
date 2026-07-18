@@ -32,6 +32,7 @@ export default function Navbar() {
         askQuestion(q, {
             onSuccess: (data) => showAnswer(q, data.answer, data.sources),
         });
+        setQuestion("");
     }
 
     function handleKeyDown(e) {
