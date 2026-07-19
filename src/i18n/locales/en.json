@@ -13,10 +13,6 @@
         "welcomeBack": "Welcome back!",
         "accountCreated": "Account created. Welcome to GIST!"
     },
-    "toasts": {
-        "genericError": "Something went wrong. Please try again.",
-        "postCreated": "Your story has been posted."
-    },
     "errorBoundary": {
         "title": "Something went wrong",
         "message": "Please refresh the page and try again.",

@@ -15,11 +15,11 @@ function MascotToastContent({ message, visible, variant }) {
       <Image
         src="/images/gist-mascot.png"
         alt=""
-        width={28}
-        height={28}
+        width={48}
+        height={48}
         className="shrink-0"
       />
-      <p className="text-sm text-foreground">{message}</p>
+      <p className="text-sm text-foreground leading-none">{message}</p>
     </div>
   );
 }

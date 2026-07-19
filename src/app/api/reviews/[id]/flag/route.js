@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { flagReview } from "@/services/flagService";
-import { apiLimiter } from "@/helpers/rateLimit";
+import { apiLimiter } from "@/helpers/rateLimiter";
+import { authOptions } from "@/lib/authOptions";
 
 export async function POST(req, { params }) {
     try {
-        const session = await getServerSession();
+        const session = await getServerSession(authOptions);
 
         if (!session?.user?.id) {
             return NextResponse.json(
@@ -25,7 +26,7 @@ export async function POST(req, { params }) {
         }
 
         const { reasonCategory, reasonDetail } = await req.json();
-        const { id } = params;
+        const { id } = await params;
 
         const result = await flagReview({
             reviewId: id,

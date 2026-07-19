@@ -2,7 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslate } from "@/hooks/useTranslate";
-import { showMascotToast } from "@/components/ui/MascotToast";
+import { showMascotToast } from "@/components/ui/Mascot/MascotToast";
 
 // ---- Fetch functions ----
 

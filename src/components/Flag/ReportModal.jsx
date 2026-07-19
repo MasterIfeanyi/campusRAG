@@ -3,12 +3,11 @@
 import { useState } from "react";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
 import TextArea from "@/components/ui/TextArea";
 import Icon from "@/icons/Icon";
 import { useTranslate } from "@/hooks/useTranslate";
 import { useFlagReview } from "@/hooks/useReviewQueries";
-import { showMascotToast } from "@/components/ui/MascotToast";
+import { showMascotToast } from "@/components/ui/Mascot/MascotToast";
 
 const REASON_KEYS = [
     "spam",

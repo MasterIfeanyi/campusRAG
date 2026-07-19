@@ -2,7 +2,7 @@ import FeedArea from "./FeedArea";
 import JoinPromoCard from "./JoinPromoCard";
 import SourcesPanel from "./SourcesPanel";
 import ErrorBoundary from "@/app/_components/ErrorBoundary";
-import CreatePost from "./CreatePost";
+
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </aside>
 
       {/* Center: page routing / home feed, independent scroll */}
-      <main className="overflow-y-auto h-full py-8">
+      <main className="overflow-y-auto h-full py-8 scrollbar-hide">
         <div className="max-w-150 mx-auto">
           <ErrorBoundary>
             <FeedArea />
