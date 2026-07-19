@@ -92,8 +92,14 @@ export default function Navbar() {
                         <span className="text-sm text-foreground">
                             {session.user?.displayName}
                         </span>
-                        <Button variant="neutral" size="medium" className="rounded-full" onClick={() => signOut()}>
-                            {dictionary.auth.landing.nav.logOut}
+                        <Button
+                            bare
+                            size="medium"
+                            className="rounded-full"
+                            onClick={() => signOut()}
+                            icon={<Icon name="logout" size={16} className="text-destructive" />}
+                        >
+                            <span className="text-sm text-destructive">{dictionary.auth.landing.nav.logOut}</span>
                         </Button>
                     </div>
                 ) : (

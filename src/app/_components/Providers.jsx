@@ -3,8 +3,8 @@ import { ThemeProvider } from "./ThemeProvider";
 import QueryProvider from "./QueryProvider";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import AppShell from "@/components/AppShell/AppShell";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "react-hot-toast";
+import { toastOptions } from "@/config/toastConfig";
 
 export default function Providers({ children }) {
   return (
@@ -20,7 +20,7 @@ export default function Providers({ children }) {
             <AppShell>
               {children}
             </AppShell>
-            <ToastContainer position="top-right" theme="colored" />
+            <Toaster position="top-center" toastOptions={toastOptions} />
           </ThemeProvider>
         </QueryProvider>
       </SessionProvider>

@@ -1,7 +1,7 @@
 import FeedArea from "./FeedArea";
 import JoinPromoCard from "./JoinPromoCard";
 import SourcesPanel from "./SourcesPanel";
-import ErrorBoundary from "@/components/ui/ErrorBoundary";
+import ErrorBoundary from "@/app/_components/ErrorBoundary";
 
 export default function Home() {
   return (
