@@ -1,10 +1,10 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { useTranslate } from "@/hooks/useTranslate";
+import { showMascotToast } from "@/components/ui/MascotToast";
 
-
-// ---- Fetch functions (kept separate from the hooks for clarity) ----
+// ---- Fetch functions ----
 
 async function flagReview({ reviewId, reasonCategory, reasonDetail }) {
     const res = await fetch(`/api/reviews/${reviewId}/flag`, {
@@ -13,10 +13,13 @@ async function flagReview({ reviewId, reasonCategory, reasonDetail }) {
         body: JSON.stringify({ reasonCategory, reasonDetail }),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Something went wrong.");
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
     return data;
 }
-
 
 async function fetchReviews() {
     const res = await fetch("/api/reviews");
@@ -32,8 +35,47 @@ async function postQuestion(question) {
         body: JSON.stringify({ question }),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error("Something went wrong.");
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
     return data;
+}
+
+async function createReview({ title, body, categories }) {
+    const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, body, categories }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
+    return data;
+}
+
+// ---- Shared error handling ----
+
+// Status codes where the server's message was written for the end user
+// and is safe to show as-is (validation, auth, not-found, rate-limit).
+// 500 (and anything unlisted) falls back to a generic message.
+const SAFE_STATUS_CODES = [400, 401, 404, 429];
+
+/** handleMutationError is a small shared helper: if the status is in SAFE_STATUS_CODES,
+ * it shows the server's actual message (e.g. "You have already flagged this review,"
+ * "Question must be at least 5 characters") via showMascotToast;
+ * otherwise it shows your generic fallback. */
+
+function handleMutationError(error, dictionary) {
+    const message = SAFE_STATUS_CODES.includes(error.status)
+        ? error.message
+        : dictionary.toasts.genericError;
+
+    showMascotToast(message, { variant: "error" });
 }
 
 // ---- Hooks ----
@@ -46,19 +88,33 @@ export function useReviews() {
 }
 
 export function useAskQuestion() {
+    const dictionary = useTranslate();
+
     return useMutation({
         mutationFn: postQuestion,
-        onError: (error) => {
-            toast.error(error.message);
-        },
+        onError: (error) => handleMutationError(error, dictionary),
     });
 }
 
 export function useFlagReview() {
+    const dictionary = useTranslate();
+
     return useMutation({
         mutationFn: flagReview,
-        onError: (error) => {
-            toast.error(error.message);
+        onError: (error) => handleMutationError(error, dictionary),
+    });
+}
+
+export function useCreateReview() {
+    const queryClient = useQueryClient();
+    const dictionary = useTranslate();
+
+    return useMutation({
+        mutationFn: createReview,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["reviews"] });
+            showMascotToast(dictionary.toasts.postCreated);
         },
+        onError: (error) => handleMutationError(error, dictionary),
     });
 }

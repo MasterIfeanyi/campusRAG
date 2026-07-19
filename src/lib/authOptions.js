@@ -56,9 +56,21 @@ export const authOptions = {
                 await dbConnect();
                 const currentUser = await User.findById(token.id);
 
-                if (!currentUser || currentUser.status === "banned") {
+                // account genuinely gone, kill the session silently
+                if (!currentUser) {
                     return null; // session killed, at most REVALIDATE_INTERVAL_MS after the ban
                 }
+
+                if (currentUser.status === "banned") {
+                    // Don't null the session yet — flag it so the client can
+                    // catch this specific reason and redirect appropriately.
+                    session.user.id = token.id;
+                    session.user.displayName = currentUser.displayName;
+                    session.user.role = currentUser.role;
+                    session.user.banned = true;
+                    return session;
+                }
+
 
                 // Refresh cached values and reset the check timer
                 token.role = currentUser.role;

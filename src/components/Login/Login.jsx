@@ -8,7 +8,7 @@ import Image from "next/image";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useTranslate } from "@/hooks/useTranslate";
-import { toast } from "react-toastify";
+import { showMascotToast } from "@/components/ui/MascotToast";
 
 export default function LoginPage() {
     const dictionary = useTranslate();
@@ -36,10 +36,11 @@ export default function LoginPage() {
         setIsSubmitting(false);
 
         if (result?.error) {
-            toast.error("Incorrect email or password.");
+            showMascotToast("Incorrect email or password.", { variant: "error" });
             return;
         }
 
+        showMascotToast(dictionary.toasts.welcomeBack);
         router.push(next);
     }
 

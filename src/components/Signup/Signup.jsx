@@ -8,7 +8,7 @@ import Image from "next/image";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useTranslate } from "@/hooks/useTranslate";
-import { toast } from "react-toastify";
+import { showMascotToast } from "@/components/ui/MascotToast";
 
 export default function SignupPage() {
   const dictionary = useTranslate();
@@ -38,7 +38,7 @@ export default function SignupPage() {
 
     if (!res.ok) {
       setIsSubmitting(false);
-      toast.error(data.error || "Something went wrong.");
+      showMascotToast(data.error || dictionary.toasts.genericError, { variant: "error" });
       return;
     }
 
@@ -54,6 +54,7 @@ export default function SignupPage() {
       return;
     }
 
+    showMascotToast(dictionary.toasts.accountCreated);
     router.push(next);
   }
 

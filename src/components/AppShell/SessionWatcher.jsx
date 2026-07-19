@@ -1,17 +1,24 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function SessionWatcher() {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const wasAuthenticated = useRef(false);
 
   useEffect(() => {
     if (status === "authenticated") {
       wasAuthenticated.current = true;
+
+      // Banned flag caught while still "authenticated" for one cycle
+      if (session?.user?.banned) {
+        signOut({ redirect: false }).then(() => {
+          router.replace("/banned");
+        });
+      }
       return;
     }
 
@@ -19,7 +26,7 @@ export default function SessionWatcher() {
       wasAuthenticated.current = false;
       router.replace("/login");
     }
-  }, [status, router]);
+  }, [status, session, router]);
 
   return null;
 }

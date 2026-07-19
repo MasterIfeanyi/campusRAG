@@ -25,7 +25,8 @@ import {
   FiSun,
   FiMoon,
   FiSearch,
-  FiFlag
+  FiFlag,
+  FiSend
 } from "react-icons/fi";
 
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -64,5 +65,6 @@ export const icons = {
   moon: FiMoon,
   search: FiSearch,
   sparkles: HiSparkles,
-  flag: FiFlag
+  flag: FiFlag,
+  send: FiSend
 };

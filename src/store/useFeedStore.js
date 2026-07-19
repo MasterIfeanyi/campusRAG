@@ -9,5 +9,7 @@ export const useFeedStore = create((set) => ({
   showAnswer: (question, answer, sources) =>
     set({ view: "answer", question, answer, sources }),
 
+  showCreatePost: () => set({ view: "createPost" }),
+
   backToFeed: () => set({ view: "feed", question: "", answer: "", sources: [] }),
 }));

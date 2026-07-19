@@ -2,6 +2,7 @@ import FeedArea from "./FeedArea";
 import JoinPromoCard from "./JoinPromoCard";
 import SourcesPanel from "./SourcesPanel";
 import ErrorBoundary from "@/app/_components/ErrorBoundary";
+import CreatePost from "./CreatePost";
 
 export default function Home() {
   return (

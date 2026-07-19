@@ -3,6 +3,20 @@
         "submit": "Submit",
         "cancel": "Cancel"
     },
+    "banned": {
+        "title": "Sorry to see you go",
+        "message": "Your account has been suspended for violating our community guidelines."
+    },
+    "toasts": {
+        "genericError": "Something went wrong. Please try again.",
+        "postCreated": "Your story has been posted.",
+        "welcomeBack": "Welcome back!",
+        "accountCreated": "Account created. Welcome to GIST!"
+    },
+    "toasts": {
+        "genericError": "Something went wrong. Please try again.",
+        "postCreated": "Your story has been posted."
+    },
     "errorBoundary": {
         "title": "Something went wrong",
         "message": "Please refresh the page and try again.",

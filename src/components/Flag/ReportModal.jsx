@@ -8,7 +8,7 @@ import TextArea from "@/components/ui/TextArea";
 import Icon from "@/icons/Icon";
 import { useTranslate } from "@/hooks/useTranslate";
 import { useFlagReview } from "@/hooks/useReviewQueries";
-import { toast } from "react-toastify";
+import { showMascotToast } from "@/components/ui/MascotToast";
 
 const REASON_KEYS = [
     "spam",
@@ -42,7 +42,7 @@ export default function ReportModal({ isShown, onClose, reviewId }) {
             { reviewId, reasonCategory: selectedReason, reasonDetail: detail.trim() },
             {
                 onSuccess: () => {
-                    toast.success(t.success);
+                    showMascotToast(t.success);
                     resetAndClose();
                 },
             }
