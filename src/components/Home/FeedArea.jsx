@@ -26,7 +26,7 @@ export default function FeedArea() {
     <div className="relative min-h-full">
       <ActiveView />
 
-      {view !== "createPost" && (
+      {view !== "createPost" && view !=="answer" && (
         <div className="sticky bottom-2 flex justify-end pointer-events-none">
           <Button
             bare
