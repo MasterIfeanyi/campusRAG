@@ -119,3 +119,37 @@ export async function unbanUser(targetUserId, requestingUser) {
 
   return { displayName: target.displayName, status: target.status };
 }
+
+export async function demoteAdmin(targetUserId, requestingUser) {
+  await dbConnect();
+
+  if (requestingUser.role !== "superadmin") {
+    const err = new Error("Only the superadmin can demote admins.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  if (targetUserId === requestingUser.id) {
+    const err = new Error("You cannot demote yourself.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  const target = await User.findById(targetUserId);
+  if (!target) {
+    const err = new Error("User not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
+  if (target.role !== "admin") {
+    const err = new Error("This user is not an admin.");
+    err.name = "ValidationError";
+    throw err;
+  }
+
+  target.role = "student";
+  await target.save();
+
+  return { displayName: target.displayName, role: target.role };
+}

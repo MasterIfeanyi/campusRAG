@@ -8,7 +8,7 @@ import Image from "next/image";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useTranslate } from "@/hooks/useTranslate";
-import { showMascotToast } from "@/components/ui/Mascot/Mascot";
+import { showMascotToast } from "@/components/ui/Mascot/MascotToast";
 
 export default function SignupPage() {
   const dictionary = useTranslate();

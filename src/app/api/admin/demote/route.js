@@ -19,6 +19,9 @@ export async function POST(req) {
     if (err.name === "NotFoundError") {
       return NextResponse.json({ error: err.message }, { status: 404 });
     }
+    if (err.name === "ValidationError") {
+      return NextResponse.json({ error: err.message }, { status: 400 });
+    }
     return NextResponse.json({ error: "Internal server error." }, { status: 500 });
   }
 }
