@@ -16,7 +16,7 @@ import {
   FiBarChart2,
   FiChevronDown,
   FiSettings,
-  FiMoreVertical, 
+  FiMoreVertical,
   FiEdit2, 
   FiTrash2, 
   FiShare2,
@@ -26,10 +26,16 @@ import {
   FiMoon,
   FiSearch,
   FiFlag,
-  FiSend
+  FiSend,
+  FiCoffee,
+  FiFilm,
+  FiCpu,
+  FiShield,
+  FiMap,
+  FiActivity,
 } from "react-icons/fi";
 
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaFlask, FaFutbol } from 'react-icons/fa';
 import { HiDocumentText, HiSparkles  } from 'react-icons/hi2';
 
 
@@ -66,5 +72,14 @@ export const icons = {
   search: FiSearch,
   sparkles: HiSparkles,
   flag: FiFlag,
-  send: FiSend
+  send: FiSend,
+  life: FiCoffee,
+  drama: FiFilm,
+  science: FaFlask,
+  sports: FaFutbol,
+  tech: FiCpu,
+  security: FiShield,
+  travel: FiMap,
+  blogging: FiEdit3,
+  health: FiActivity,
 };

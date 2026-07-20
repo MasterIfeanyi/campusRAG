@@ -7,6 +7,25 @@
         "title": "Sorry to see you go",
         "message": "Your account has been suspended for violating our community guidelines."
     },
+    "onboarding": {
+        "interests": {
+            "title": "Select Your Interests",
+            "subtitle": "This will help us personalize your experience",
+            "tags": {
+                "Life": "Life",
+                "Drama": "Drama",
+                "Science": "Science",
+                "Sports": "Sports",
+                "Tech": "Tech",
+                "Security": "Security",
+                "Travel": "Travel",
+                "Blogging": "Blogging",
+                "Health": "Health"
+            },
+            "continueButton": "Continue",
+            "minRequired": "Select at least 2 interests to continue"
+        }
+    },
     "toasts": {
         "genericError": "Something went wrong. Please try again.",
         "postCreated": "Your story has been posted.",

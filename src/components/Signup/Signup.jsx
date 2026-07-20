@@ -55,7 +55,7 @@ export default function SignupPage() {
     }
 
     showMascotToast(dictionary.toasts.accountCreated);
-    router.push(next);
+    router.push("/onboarding/interests");
   }
 
   return (

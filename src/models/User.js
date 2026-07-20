@@ -30,6 +30,11 @@ const UserSchema = new mongoose.Schema(
             enum: ["active", "banned"],
             default: "active",
         },
+        interests: {
+            type: [String],
+            enum: ["Life", "Drama", "Science", "Sports", "Tech", "Security", "Travel", "Blogging", "Health"],
+            default: [],
+        },
     },
     { timestamps: true }
 );

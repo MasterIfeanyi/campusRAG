@@ -6,6 +6,21 @@ import { showMascotToast } from "@/components/ui/Mascot/MascotToast";
 
 // ---- Fetch functions ----
 
+async function updateInterests(interests) {
+    const res = await fetch("/api/user/interests", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ interests }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
+    return data;
+}
+
 async function flagReview({ reviewId, reasonCategory, reasonDetail }) {
     const res = await fetch(`/api/reviews/${reviewId}/flag`, {
         method: "POST",
@@ -115,6 +130,15 @@ export function useCreateReview() {
             queryClient.invalidateQueries({ queryKey: ["reviews"] });
             showMascotToast(dictionary.toasts.postCreated);
         },
+        onError: (error) => handleMutationError(error, dictionary),
+    });
+}
+
+export function useUpdateInterests() {
+    const dictionary = useTranslate();
+
+    return useMutation({
+        mutationFn: updateInterests,
         onError: (error) => handleMutationError(error, dictionary),
     });
 }
