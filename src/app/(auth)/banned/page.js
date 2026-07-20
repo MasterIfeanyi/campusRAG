@@ -1,6 +1,6 @@
 "use client";
 
-import MascotState from "@/components/ui/MascotState";
+import MascotState from "@/components/ui/Mascot/Mascot";
 import { useTranslate } from "@/hooks/useTranslate";
 
 export default function BannedPage() {

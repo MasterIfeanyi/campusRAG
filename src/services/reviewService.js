@@ -38,7 +38,7 @@ export async function createReview({ title, body, categories, userId }) {
   return review;
 }
 
-export async function getReviews() {
+export async function getReviews(userInterests = []) {
   await dbConnect();
 
   const reviews = await Review.find({ status: "visible" })
@@ -47,7 +47,18 @@ export async function getReviews() {
     .limit(50)
     .lean();
 
-  return reviews.map((r) => ({
+  const scored = reviews.map((r) => {
+    const overlap = r.categories.filter((tag) => userInterests.includes(tag)).length;
+    return { ...r, _matchScore: overlap };
+  });
+
+  // Sort by match score first (higher overlap wins), then by recency
+  scored.sort((a, b) => {
+    if (b._matchScore !== a._matchScore) return b._matchScore - a._matchScore;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
+  return scored.map((r) => ({
     id: r._id,
     title: r.title,
     body: r.body,
