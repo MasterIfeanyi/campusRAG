@@ -38,6 +38,10 @@
         "refresh": "Refresh"
     },
     "mascotStates": {
+        "banned": {
+            "title": "Sorry to see you go",
+            "message": "Your account has been suspended for violating our community guidelines."
+        },
         "loadError": {
             "title": "Something went wrong",
             "message": "Could not load stories. Try refreshing."
