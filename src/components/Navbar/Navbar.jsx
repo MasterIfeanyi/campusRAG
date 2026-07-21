@@ -84,7 +84,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-3">
                 {isLoading ? (
                     <div className="flex items-center gap-3 animate-pulse">
-                        <div className="h-4 w-24 rounded bg-muted" />
+                        <div className="h-9 w-20 rounded-full bg-muted" />
                         <div className="h-9 w-20 rounded-full bg-muted" />
                     </div>
                 ) : isLoggedIn ? (
