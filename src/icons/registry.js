@@ -33,6 +33,7 @@ import {
   FiShield,
   FiMap,
   FiActivity,
+  FiEdit3
 } from "react-icons/fi";
 
 import { FaBars, FaTimes, FaFlask, FaFutbol } from 'react-icons/fa';
