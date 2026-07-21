@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import Button from "@/components/ui/Button";
 import { useTranslate } from "@/hooks/useTranslate";
 import { showMascotToast } from "@/components/ui/Mascot/MascotToast";
 
-export default function SignupPage() {
+function SignupForm() {
   const dictionary = useTranslate();
   const t = dictionary.auth.signUp;
   const tagline = dictionary.auth.landing.tagline;
@@ -117,5 +117,13 @@ export default function SignupPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupForm />
+    </Suspense>
   );
 }
