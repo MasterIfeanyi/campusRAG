@@ -67,3 +67,26 @@ export async function getReviews(userInterests = []) {
     createdAt: r.createdAt,
   }));
 }
+
+export async function getReviewById(reviewId) {
+  await dbConnect();
+
+  const review = await Review.findOne({ _id: reviewId, status: "visible" })
+    .populate("userId", "displayName")
+    .lean();
+
+  if (!review) {
+    const err = new Error("Review not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
+  return {
+    id: review._id,
+    title: review.title,
+    body: review.body,
+    categories: review.categories,
+    authorDisplayName: review.userId?.displayName || "Unknown",
+    createdAt: review.createdAt,
+  };
+}

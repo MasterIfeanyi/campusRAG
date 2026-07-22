@@ -36,7 +36,7 @@ export default function InterestsPage() {
     if (selected.length >= MIN_INTERESTS && !hasSubmitted.current) {
       hasSubmitted.current = true;
       saveInterests(selected, {
-        onSuccess: () => router.push("/feed"),
+        onSuccess: () => router.push("/"),
         onError: () => {
           hasSubmitted.current = false; // let them try again on failure
         },

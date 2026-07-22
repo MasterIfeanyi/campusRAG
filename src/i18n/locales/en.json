@@ -3,6 +3,11 @@
         "submit": "Submit",
         "cancel": "Cancel"
     },
+    "reviewDetail": {
+        "notFoundTitle": "Story not found",
+        "notFoundMessage": "This story may have been removed.",
+        "postedOn": "Posted on {date}"
+    },
     "banned": {
         "title": "Sorry to see you go",
         "message": "Your account has been suspended for violating our community guidelines."

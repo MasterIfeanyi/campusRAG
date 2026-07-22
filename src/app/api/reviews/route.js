@@ -3,6 +3,9 @@ import { getServerSession } from "next-auth";
 import { createReview, getReviews } from "@/services/reviewService";
 import { submitReviewLimiter } from "@/helpers/rateLimiter";
 import { authOptions } from "@/lib/authOptions";
+import dbConnect from "@/lib/dbConnect";
+import User from "@/models/User";
+
 
 export async function POST(req) {
     try {
@@ -66,6 +69,16 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const reviews = await getReviews();
+  const session = await getServerSession(authOptions);
+
+  let userInterests = [];
+
+  if (session?.user?.id) {
+    await dbConnect();
+    const user = await User.findById(session.user.id).select("interests").lean();
+    userInterests = user?.interests || [];
+  }
+
+  const reviews = await getReviews(userInterests);
   return NextResponse.json({ success: true, reviews });
 }
