@@ -59,7 +59,7 @@ export default function Navbar() {
                         id="navbar-search"
                         variant="ghost"
                         type="text"
-                        placeholder="Find anything"
+                        placeholder={dictionary.auth.landing.nav.search}
                         value={question}
                         onChange={(e) => setQuestion(e.target.value)}
                         onKeyDown={handleKeyDown}
@@ -74,7 +74,7 @@ export default function Navbar() {
                         className="pl-3 border-l border-border shrink-0 rounded-none"
                     >
                         <span className="hidden sm:inline text-sm">
-                            {isPending ? "Asking..." : "Ask"}
+                            {isPending ? dictionary.auth.landing.nav.button2 : dictionary.auth.landing.nav.button}
                         </span>
                     </Button>
                 </div>

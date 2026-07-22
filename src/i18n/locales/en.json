@@ -144,7 +144,10 @@
             "nav": {
                 "logIn": "Log In",
                 "signUp": "Sign Up",
-                "logOut": "Log Out"
+                "logOut": "Log Out",
+                "search": "Ask anything",
+                "button": "Ask",
+                "button2": "Asking..."
             },
             "tagline": "Gathered Insights From Testimonies",
             "hero": {
