@@ -19,7 +19,7 @@ export default function NetworkStatusBanner() {
     };
   }, []);
 
-  if (!isOffline) return null;
+  if (!isOffline || !dictionary?.networkStatus) return null;
 
   return (
     <div className="bg-yellow-500 text-black text-sm text-center py-1.5 fixed top-0 left-0 right-0 z-[200] flex items-center justify-center gap-2">
