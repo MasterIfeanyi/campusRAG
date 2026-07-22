@@ -15,7 +15,7 @@ export default function JoinPromoCard() {
   if (status === "authenticated") return null;
 
   return (
-    <div className="relative rounded-2xl overflow-hidden min-h-85">
+    <div className="relative rounded-2xl my-darkmode-border overflow-hidden min-h-85">
       {/* Background image layer */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
@@ -37,7 +37,7 @@ export default function JoinPromoCard() {
           >
             {parseHighlight(t.title)}
           </h2>
-          <ul className="space-y-2 text-sm" style={{ color: "var(--muted)" }}>
+          <ul className="space-y-2 text-sm" style={{ color: "var(--muted-on-dark)" }}>
             {t.features.map((feature) => (
               <li key={feature} className="flex items-center gap-2">
                 <span style={{ color: "var(--primary)" }}>—</span>

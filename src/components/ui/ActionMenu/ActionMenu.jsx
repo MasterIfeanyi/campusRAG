@@ -57,7 +57,7 @@ export default function ActionMenu({ actions = [], trigger, align = "right" }) {
       {open && (
         <div
           role="menu"
-          className={`absolute ${align === "right" ? "right-0" : "left-0"} mt-1 w-52 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50`}
+          className={`absolute ${align === "right" ? "right-0" : "left-0"} mt-1 w-52 bg-card border border-border rounded-lg shadow-lg py-1 z-50`}
         >
           {visibleActions.map((action) => (
             <div key={action.key}>

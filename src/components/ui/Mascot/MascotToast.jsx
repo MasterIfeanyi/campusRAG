@@ -7,7 +7,7 @@ function MascotToastContent({ message, visible, variant }) {
 
   return (
     <div
-      className={`flex items-center gap-3 bg-white rounded-full shadow-lg px-4 py-2.5 max-w-sm transition-all duration-200 ${
+      className={`flex items-center gap-3 bg-card rounded-full shadow-lg px-4 py-2.5 max-w-sm transition-all duration-200 ${
         visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
       }`}
       style={{ border: `1px solid ${borderColor}` }}

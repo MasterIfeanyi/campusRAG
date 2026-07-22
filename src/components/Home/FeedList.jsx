@@ -49,7 +49,7 @@ function StoryCard({ review, requireAuth, router }) {
   return (
     <div onClick={openStory} className="py-5 px-1 cursor-pointer group">
       <div className="flex items-start justify-between">
-        <p className="text-xs text-gray-400">{review.authorDisplayName}</p>
+        <p className="text-xs text-muted-foreground">{review.authorDisplayName}</p>
 
         <div onClick={(e) => e.stopPropagation()}>
           <ActionMenu
@@ -70,10 +70,10 @@ function StoryCard({ review, requireAuth, router }) {
           />
         </div>
       </div>
-      <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-green-600 transition-colors">
+      <h3 className="font-semibold text-foreground mt-1 group-hover:text-primary transition-colors">
         {review.title}
       </h3>
-      <p className="text-gray-500 text-sm mt-1.5 line-clamp-4 leading-relaxed">
+      <p className="text-muted-foreground text-sm mt-1.5 line-clamp-4 leading-relaxed">
         {review.body}
       </p>
     </div>

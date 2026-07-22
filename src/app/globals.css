@@ -262,6 +262,13 @@ p {
     linear-gradient(90deg, var(--primary), var(--ring)) border-box;
 }
 
+[data-theme="dark"] .my-darkmode-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(90deg, var(--primary), var(--ring)) border-box;
+}
+
 .contributors-mask {
   -webkit-mask-image: linear-gradient(
     to bottom,

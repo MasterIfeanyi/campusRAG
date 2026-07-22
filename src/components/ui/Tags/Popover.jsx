@@ -45,11 +45,11 @@ export default function TagPopover({ tags, setTags }) {
       <Button
         bare
         onClick={() => setOpen((prev) => !prev)}
-        icon={<Icon name="moreVertical" size={20} className="text-gray-400" />}
+        icon={<Icon name="moreVertical" size={20} className="text-muted-foreground" />}
       />
 
       {open && (
-        <div className="absolute bottom-full left-0 mb-2 w-64 bg-white border border-border rounded-2xl shadow-lg p-4 z-50">
+        <div className="absolute bottom-full left-0 mb-2 w-64 bg-card border border-border rounded-2xl shadow-lg p-4 z-50">
           <Input
             id="post-tag-input"
             value={inputValue}

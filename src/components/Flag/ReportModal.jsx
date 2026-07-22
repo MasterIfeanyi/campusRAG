@@ -52,7 +52,7 @@ export default function ReportModal({ isShown, onClose, reviewId }) {
         <Modal isShown={isShown} onClose={resetAndClose}>
             <div className="flex items-center justify-center min-h-full p-4">
                 <div
-                    className="bg-white rounded-2xl w-full max-w-md p-6 shadow-lg"
+                    className="bg-card rounded-2xl w-full max-w-md p-6 shadow-lg my-darkmode-border"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className="flex items-center justify-between mb-3">
