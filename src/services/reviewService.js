@@ -90,3 +90,91 @@ export async function getReviewById(reviewId) {
     createdAt: review.createdAt,
   };
 }
+
+export async function getReviewsByUser(userId) {
+  await dbConnect();
+
+  const reviews = await Review.find({
+    userId,
+    status: { $ne: "removed" },
+  })
+    .sort({ createdAt: -1 })
+    .lean();
+
+  return reviews.map((r) => ({
+    id: r._id,
+    title: r.title,
+    body: r.body,
+    categories: r.categories,
+    status: r.status,
+    createdAt: r.createdAt,
+  }));
+}
+
+export async function updateReview({ reviewId, userId, title, body, categories }) {
+  await dbConnect();
+
+  const review = await Review.findById(reviewId);
+
+  if (!review || review.status === "removed") {
+    const err = new Error("Review not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
+  if (review.userId.toString() !== userId) {
+    const err = new Error("You can only edit your own reviews.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  const bodyCheck = validateTextLength(body, { min: 10, max: 3000, fieldName: "Review body" });
+
+  if (!bodyCheck.valid) {
+    const err = new Error(bodyCheck.error);
+    err.name = "ValidationError";
+    throw err;
+  }
+
+  const cleanTitle = sanitizeText(title || "").slice(0, 150);
+  const categoryList = normalizeCategories(categories);
+
+  const textToEmbed = `${cleanTitle}\n${bodyCheck.cleaned}`.trim();
+  const embedding = await embedText(textToEmbed);
+
+  review.title = cleanTitle;
+  review.body = bodyCheck.cleaned;
+  review.categories = categoryList;
+  review.embedding = embedding;
+
+  await review.save();
+
+  return {
+    id: review._id,
+    title: review.title,
+    body: review.body,
+    categories: review.categories,
+    createdAt: review.createdAt,
+  };
+}
+
+export async function deleteReview({ reviewId, userId }) {
+  await dbConnect();
+
+  const review = await Review.findById(reviewId);
+
+  if (!review || review.status === "removed") {
+    const err = new Error("Review not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
+  if (review.userId.toString() !== userId) {
+    const err = new Error("You can only delete your own reviews.");
+    err.name = "ForbiddenError";
+    throw err;
+  }
+
+  review.status = "removed";
+  await review.save();
+}

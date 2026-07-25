@@ -84,12 +84,49 @@ async function createReview({ title, body, categories }) {
     return data;
 }
 
+async function fetchUserReviews() {
+    const res = await fetch("/api/reviews/user");
+    const data = await res.json();
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
+    return data.reviews || [];
+}
+
+async function putReview({ id, title, body, categories }) {
+    const res = await fetch(`/api/reviews/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, body, categories }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
+    return data.review;
+}
+
+async function removeReview(id) {
+    const res = await fetch(`/api/reviews/${id}`, { method: "DELETE" });
+    const data = await res.json();
+    if (!res.ok) {
+        const err = new Error(data.error || "Something went wrong.");
+        err.status = res.status;
+        throw err;
+    }
+    return data;
+}
+
 // ---- Shared error handling ----
 
 // Status codes where the server's message was written for the end user
-// and is safe to show as-is (validation, auth, not-found, rate-limit).
+// and is safe to show as-is (validation, auth, forbidden, not-found, rate-limit).
 // 500 (and anything unlisted) falls back to a generic message.
-const SAFE_STATUS_CODES = [400, 401, 404, 429];
+const SAFE_STATUS_CODES = [400, 401, 403, 404, 429];
 
 /** handleMutationError is a small shared helper: if the status is in SAFE_STATUS_CODES,
  * it shows the server's actual message (e.g. "You have already flagged this review,"
@@ -159,5 +196,42 @@ export function useFetchReview(id) {
         queryKey: ["review", id],
         queryFn: () => fetchReviewById(id),
         enabled: !!id,
+    });
+}
+
+export function useUserReviews() {
+    return useQuery({
+        queryKey: ["userReviews"],
+        queryFn: fetchUserReviews,
+    });
+}
+
+export function useUpdateReview() {
+    const queryClient = useQueryClient();
+    const dictionary = useTranslate();
+
+    return useMutation({
+        mutationFn: putReview,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["userReviews"] });
+            queryClient.invalidateQueries({ queryKey: ["reviews"] });
+            showMascotToast(dictionary.toasts.postUpdated);
+        },
+        onError: (error) => handleMutationError(error, dictionary),
+    });
+}
+
+export function useDeleteReview() {
+    const queryClient = useQueryClient();
+    const dictionary = useTranslate();
+
+    return useMutation({
+        mutationFn: removeReview,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["userReviews"] });
+            queryClient.invalidateQueries({ queryKey: ["reviews"] });
+            showMascotToast(dictionary.toasts.postDeleted);
+        },
+        onError: (error) => handleMutationError(error, dictionary),
     });
 }
