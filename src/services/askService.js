@@ -54,7 +54,8 @@ export async function askQuestion(question) {
 
   return {
     answer,
-    sources: results.map((r) => ({
+    sources: results.map((r, idx) => ({
+      index: idx + 1,
       id: r._id,
       title: r.title,
       categories: r.categories,
