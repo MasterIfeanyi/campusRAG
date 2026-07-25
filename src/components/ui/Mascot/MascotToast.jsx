@@ -19,7 +19,7 @@ function MascotToastContent({ message, visible, variant }) {
         height={48}
         className="shrink-0"
       />
-      <p className="text-sm text-foreground leading-none">{message}</p>
+      <p className="text-sm text-foreground leading-none" style={{marginBottom: 0}}>{message}</p>
     </div>
   );
 }
@@ -28,7 +28,7 @@ export function showMascotToast(message, { variant = "default", ...options } = {
   return toast.custom(
     (t) => <MascotToastContent message={message} visible={t.visible} variant={variant} />,
     {
-      duration: 4000,
+      duration: 60000,
       position: "top-center",
       ...options,
     }

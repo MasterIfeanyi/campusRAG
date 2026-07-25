@@ -17,8 +17,8 @@ import {
   FiChevronDown,
   FiSettings,
   FiMoreVertical,
-  FiEdit2, 
-  FiTrash2, 
+  FiEdit2,
+  FiTrash2,
   FiShare2,
   FiFolderPlus,
   FiLogIn,
@@ -33,11 +33,12 @@ import {
   FiShield,
   FiMap,
   FiActivity,
-  FiEdit3
+  FiEdit3,
+  FiArrowLeft
 } from "react-icons/fi";
 
 import { FaBars, FaTimes, FaFlask, FaFutbol } from 'react-icons/fa';
-import { HiDocumentText, HiSparkles  } from 'react-icons/hi2';
+import { HiDocumentText, HiSparkles } from 'react-icons/hi2';
 
 
 export const icons = {
@@ -83,4 +84,5 @@ export const icons = {
   travel: FiMap,
   blogging: FiEdit3,
   health: FiActivity,
+  arrowLeft: FiArrowLeft,
 };

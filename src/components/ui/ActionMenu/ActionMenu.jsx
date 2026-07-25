@@ -3,10 +3,13 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "../Button";
 import Icon from "@/icons/Icon";
+import { useSession } from "next-auth/react";
 import ActionMenuItem from "./ActionMenuItem";
+import Link from "next/link";
 
 export default function ActionMenu({ actions = [], trigger, align = "right" }) {
   const [open, setOpen] = useState(false);
+  const { data: session } = useSession();
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -59,6 +62,13 @@ export default function ActionMenu({ actions = [], trigger, align = "right" }) {
           role="menu"
           className={`absolute ${align === "right" ? "right-0" : "left-0"} mt-1 w-52 bg-card border border-border rounded-lg shadow-lg py-1 z-50`}
         >
+          <div className="px-4 py-2 flex items-center gap-2">
+            {session?.user?.displayName ? (
+              <Link href="/profile" className="text-sm text-foreground font-medium cursor-pointer">{session.user.displayName}</Link>
+            ) : (
+              <Link href="/login" className="text-sm text-foreground font-medium cursor-pointer">Guest</Link>
+            )}
+          </div>
           {visibleActions.map((action) => (
             <div key={action.key}>
               {action.dividerBefore && <div className="my-1 border-t border-gray-100" />}

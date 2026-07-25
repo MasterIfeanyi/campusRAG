@@ -38,6 +38,8 @@
     "toasts": {
         "genericError": "Something went wrong. Please try again.",
         "postCreated": "Your story has been posted.",
+        "postUpdated": "Your story has been updated.",
+        "postDeleted": "Your story has been deleted.",
         "welcomeBack": "Welcome back!",
         "accountCreated": "Account created. Welcome to GIST!"
     },
@@ -189,5 +191,19 @@
         "submitButton": "Submit Review",
         "noResults": "No matching reviews found",
         "relevanceScore": "Relevance"
+    },
+    "profile": {
+        "title": "Your Stories",
+        "emptyTitle": "No stories yet",
+        "emptyMessage": "Your published stories will appear here.",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "saving": "Saving...",
+        "deleteConfirmTitle": "Delete this story?",
+        "deleteConfirmMessage": "This action cannot be undone. The story will be permanently removed.",
+        "deleteConfirm": "Delete",
+        "deleting": "Deleting..."
     }
 }

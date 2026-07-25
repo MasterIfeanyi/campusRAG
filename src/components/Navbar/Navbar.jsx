@@ -89,9 +89,9 @@ export default function Navbar() {
                     </div>
                 ) : isLoggedIn ? (
                     <div className="flex items-center gap-3">
-                        <span className="text-sm text-foreground">
+                        <Link href="/profile" className="text-sm text-foreground font-bold cursor-pointer">
                             {session.user?.displayName}
-                        </span>
+                        </Link>
                         <Button
                             bare
                             size="medium"
