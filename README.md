@@ -107,14 +107,53 @@ npm run lint
 ---
 
 ## Contributing
-1. **Fork** the repository.
-2. **Create a branch** for your feature or bugfix:
+
+1. **Fork** the repository on GitHub.
+2. **Clone** your fork (or configure your remotes if cloned before forking):
    ```bash
-   git checkout -b <your‑username>/<feature‑name>
+   git clone https://github.com/YOUR_GITHUB_USERNAME/campusRAG.git
+   cd campusRAG
    ```
-3. **Commit** your changes with a clear message.
-4. **Push** to your fork and open a Pull Request.
-5. Ensure all CI checks pass before merging.
+3. **Create a branch** for your feature or bugfix:
+   ```bash
+   git checkout -b <your-username>/<feature-name>
+   ```
+4. **Commit** your changes with a clear message.
+5. **Push** to your fork and open a Pull Request.
+
+### What if you cloned the repository before forking?
+
+If you cloned `MasterIfeanyi/campusRAG` directly before forking, your `origin` remote points to the main repository (where push permission is denied). You do **not** need to delete or re-clone your local project!
+
+Follow these 4 steps to fix your remotes:
+
+1. **Fork the repo on GitHub** (if you haven't already).
+2. **Point `origin` to your fork**:
+   ```bash
+   git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/campusRAG.git
+   ```
+3. **Add `upstream` remote** (pointing to the original repo):
+   ```bash
+   git remote add upstream https://github.com/MasterIfeanyi/campusRAG.git
+   ```
+4. **Verify your remotes**:
+   ```bash
+   git remote -v
+   ```
+   *Expected output:*
+   ```text
+   origin    https://github.com/YOUR_GITHUB_USERNAME/campusRAG.git (fetch)
+   origin    https://github.com/YOUR_GITHUB_USERNAME/campusRAG.git (push)
+   upstream  https://github.com/MasterIfeanyi/campusRAG.git (fetch)
+   upstream  https://github.com/MasterIfeanyi/campusRAG.git (push)
+   ```
+5. **Sync with upstream & push your branch**:
+   ```bash
+   git fetch upstream
+   git rebase upstream/main
+   git push -u origin <your-username>/<feature-name>
+   ```
+6. Visit GitHub to open a **Pull Request**!
 
 ### Code style
 - Use **Prettier** formatting (`npm run lint`).
