@@ -28,7 +28,7 @@ export function showMascotToast(message, { variant = "default", ...options } = {
   return toast.custom(
     (t) => <MascotToastContent message={message} visible={t.visible} variant={variant} />,
     {
-      duration: 60000,
+      duration: 5000,
       position: "top-center",
       ...options,
     }

@@ -14,6 +14,8 @@ import Icon from "@/icons/Icon";
 import { useFeedStore } from "@/store/useFeedStore";
 import { useAskQuestion } from "@/hooks/useReviewQueries";
 
+import { showMascotToast } from "@/components/ui/Mascot/MascotToast";
+
 export default function Navbar() {
     const { data: session, status } = useSession();
     const isLoading = status === "loading";
@@ -27,10 +29,15 @@ export default function Navbar() {
     const dictionary = useTranslate();
 
     function handleAsk(q) {
-        if (!q.trim()) return;
+        const trimmed = q.trim();
+        if (!trimmed) return;
+        if (trimmed.length < 5) {
+            showMascotToast("Question must be at least 5 characters.", { variant: "error" });
+            return;
+        }
         router.push("/");
-        askQuestion(q, {
-            onSuccess: (data) => showAnswer(q, data.answer, data.sources),
+        askQuestion(trimmed, {
+            onSuccess: (data) => showAnswer(trimmed, data.answer, data.sources),
         });
         setQuestion("");
     }
