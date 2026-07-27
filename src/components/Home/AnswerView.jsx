@@ -10,50 +10,7 @@ import MascotState from "@/components/ui/Mascot/Mascot";
 
 
 
-import Link from "next/link";
-
-function renderAnswerWithCitations(answerText, sources = []) {
-  if (!answerText) return null;
-
-  // Matches citation tags like [1], [2], [3]
-  const regex = /\[(\d+)\]/g;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
-
-  while ((match = regex.exec(answerText)) !== null) {
-    const textBefore = answerText.substring(lastIndex, match.index);
-    if (textBefore) parts.push(textBefore);
-
-    const sourceNum = parseInt(match[1], 10);
-    const source = sources.find(
-      (s) => s.index === sourceNum || sources.indexOf(s) + 1 === sourceNum
-    );
-
-    if (source) {
-      parts.push(
-        <Link
-          key={`${match.index}-${sourceNum}`}
-          href={`/reviews/${source.id}`}
-          title={source.title}
-          className="inline-flex items-center justify-center px-1.5 py-0.5 mx-0.5 text-xs font-semibold rounded bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/25 dark:text-primary dark:hover:bg-primary/35 transition-colors"
-        >
-          [{sourceNum}]
-        </Link>
-      );
-    } else {
-      parts.push(match[0]);
-    }
-
-    lastIndex = regex.lastIndex;
-  }
-
-  if (lastIndex < answerText.length) {
-    parts.push(answerText.substring(lastIndex));
-  }
-
-  return parts;
-}
+import { renderFormattedAnswer } from "@/lib/parseMarkdown";
 
 export default function AnswerView({ isAsking, askError }) {
   const { question, answer, sources, backToFeed } = useFeedStore();
@@ -82,8 +39,8 @@ export default function AnswerView({ isAsking, askError }) {
       )}
 
       {!isAsking && answer && (
-        <div className="text-foreground dark:text-gray-100 leading-relaxed whitespace-pre-wrap">
-          {renderAnswerWithCitations(answer, sources)}
+        <div className="text-foreground dark:text-gray-100 leading-relaxed">
+          {renderFormattedAnswer(answer)}
         </div>
       )}
 

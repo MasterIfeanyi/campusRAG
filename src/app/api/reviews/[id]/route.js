@@ -11,8 +11,8 @@ export async function GET(req, { params }) {
   } catch (err) {
     console.error("Get review error:", err);
 
-    if (err.name === "NotFoundError") {
-      return NextResponse.json({ error: err.message }, { status: 404 });
+    if (err.name === "NotFoundError" || err.name === "CastError") {
+      return NextResponse.json({ error: "Review not found." }, { status: 404 });
     }
 
     return NextResponse.json({ error: "Internal server error." }, { status: 500 });

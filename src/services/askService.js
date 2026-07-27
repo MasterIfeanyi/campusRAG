@@ -3,6 +3,28 @@ import Review from "@/models/Review";
 import { embedText, generateAnswer } from "@/lib/ai";
 import { validateTextLength } from "@/helpers/fn";
 
+export const RELEVANCE_BENCHMARK_THRESHOLD = 0.78;
+export const MAX_SCORE_DELTA = 0.08;
+
+/**
+ * Evaluates candidates against the relevance benchmark.
+ * Requires candidate score to be:
+ * 1) >= 0.78 absolute similarity score
+ * 2) Within 0.08 of the top matching candidate score (relative gap)
+ * Removes all weak or unrelated posts.
+ */
+export function filterByRelevanceBenchmark(candidates) {
+  if (!Array.isArray(candidates) || candidates.length === 0) return [];
+
+  const validCandidates = candidates.filter((item) => typeof item?.score === "number");
+  if (validCandidates.length === 0) return [];
+
+  const topScore = Math.max(...validCandidates.map((c) => c.score));
+  const effectiveThreshold = Math.max(RELEVANCE_BENCHMARK_THRESHOLD, topScore - MAX_SCORE_DELTA);
+
+  return validCandidates.filter((item) => item.score >= effectiveThreshold);
+}
+
 export async function askQuestion(question) {
   await dbConnect();
 
@@ -39,9 +61,8 @@ export async function askQuestion(question) {
     },
   ]);
 
-  // 3. Filter vector search results by minimum relevance similarity threshold (0.65)
-  const MIN_SIMILARITY_SCORE = 0.65;
-  const relevantResults = results.filter((r) => (r.score ?? 1) >= MIN_SIMILARITY_SCORE);
+  // 3. Relevance Benchmark Evaluation: Filter out posts failing the benchmark threshold (0.68)
+  const relevantResults = filterByRelevanceBenchmark(results, RELEVANCE_BENCHMARK_THRESHOLD);
 
   if (relevantResults.length === 0) {
     return {
@@ -50,34 +71,20 @@ export async function askQuestion(question) {
     };
   }
 
-  // 4. Build context chunks for Gemma/LLM from top relevant matches
+  // 4. Build context chunks for Gemma/LLM from top benchmark-passing matches
   const contextChunks = relevantResults.map((r) => `${r.title}\n${r.body}`);
 
   // 5. Ask AI to answer using only that retrieved context
   const answer = await generateAnswer(check.cleaned, contextChunks);
 
-  // 6. Extract cited source numbers (e.g. [1], [2]) from the AI answer
-  const citedIndices = new Set(
-    [...answer.matchAll(/\[(\d+)\]/g)].map((m) => parseInt(m[1], 10))
-  );
-
-  // 7. Only return sources that were actually cited in the generated answer
-  const citedResults = citedIndices.size > 0
-    ? relevantResults.filter((_, idx) => citedIndices.has(idx + 1))
-    : [];
-
   return {
     answer,
-    sources: citedResults.map((r) => {
-      const origIdx = relevantResults.indexOf(r);
-      return {
-        index: origIdx + 1,
-        id: r._id,
-        title: r.title,
-        categories: r.categories,
-        author: r.author,
-        score: r.score,
-      };
-    }),
+    sources: relevantResults.map((r) => ({
+      id: r._id,
+      title: r.title,
+      categories: r.categories,
+      author: r.author,
+      score: r.score,
+    })),
   };
 }

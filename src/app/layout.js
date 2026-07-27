@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Providers from "./_components/Providers";
 
@@ -24,18 +23,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script id="performance-patch" strategy="beforeInteractive">
-          {`
-            if (typeof window !== 'undefined' && window.performance && window.performance.measure) {
-              const origMeasure = window.performance.measure.bind(window.performance);
-              window.performance.measure = function(name, startMark, endMark) {
-                try {
-                  return origMeasure(name, startMark, endMark);
-                } catch (e) {}
-              };
-            }
-          `}
-        </Script>
         <Providers>{children}</Providers>
         <div id="modal-root"></div>
       </body>
