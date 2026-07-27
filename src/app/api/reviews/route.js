@@ -5,7 +5,7 @@ import { submitReviewLimiter } from "@/helpers/rateLimiter";
 import { authOptions } from "@/lib/authOptions";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
-
+import { postEmitter } from "@/lib/postEmitter";
 
 export async function POST(req) {
     try {
@@ -41,11 +41,28 @@ export async function POST(req) {
         }
 
         // 3. call the service `createReview` (sanitizing, validating, embedding, saving) lives in the service
-        const review = await createReview({ title, body, categories, userId: session.user.id, });
+        const review = await createReview({ title, body, categories, userId: session.user.id });
+        await dbConnect();
+        const user = await User.findById(session.user.id).select("displayName").lean();
+
+        const authorDisplayName = user?.displayName || "Someone";
+
+        // Emit real-time post creation event to all connected SSE clients
+        try {
+            postEmitter.emit("new-post", {
+                id: review._id.toString(),
+                userId: session.user.id,
+                authorName: authorDisplayName,
+                createdAt: review.createdAt || new Date().toISOString(),
+            });
+        } catch (emitErr) {
+            console.error("Failed to emit post notification event:", emitErr);
+        }
 
         return NextResponse.json({
             success: true,
             id: review._id,
+            authorDisplayName,
             remainingRequests: remaining,
         },
             { status: 201 }
@@ -69,16 +86,16 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions);
 
-  let userInterests = [];
+    let userInterests = [];
 
-  if (session?.user?.id) {
-    await dbConnect();
-    const user = await User.findById(session.user.id).select("interests").lean();
-    userInterests = user?.interests || [];
-  }
+    if (session?.user?.id) {
+        await dbConnect();
+        const user = await User.findById(session.user.id).select("interests").lean();
+        userInterests = user?.interests || [];
+    }
 
-  const reviews = await getReviews(userInterests);
-  return NextResponse.json({ success: true, reviews });
+    const reviews = await getReviews(userInterests);
+    return NextResponse.json({ success: true, reviews });
 }
