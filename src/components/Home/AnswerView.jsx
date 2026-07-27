@@ -10,8 +10,10 @@ import MascotState from "@/components/ui/Mascot/Mascot";
 
 
 
+import { renderFormattedAnswer } from "@/lib/parseMarkdown";
+
 export default function AnswerView({ isAsking, askError }) {
-  const { question, answer, backToFeed } = useFeedStore();
+  const { question, answer, sources, backToFeed } = useFeedStore();
   const dictionary = useTranslate();
 
   return (
@@ -20,12 +22,12 @@ export default function AnswerView({ isAsking, askError }) {
         type="button"
         bare
         onClick={backToFeed}
-        icon={<Icon name="back" size={16} className="text-gray-400" />}
+        icon={<Icon name="back" size={16} className="text-gray-400 dark:text-gray-500" />}
         className="mb-4"
       >
-        <span className="text-sm text-gray-400">Back</span>
+        <span className="text-sm text-gray-400 dark:text-gray-400">Back</span>
       </Button>
-      <p className="text-sm text-gray-500 mb-2">{question}</p>
+      <p className="text-sm text-muted-foreground mb-3">{question}</p>
 
       {isAsking && <LoadingIndicator text="Thinking" />}
 
@@ -36,7 +38,11 @@ export default function AnswerView({ isAsking, askError }) {
         />
       )}
 
-      {!isAsking && answer && <p className="text-gray-800 leading-relaxed">{answer}</p>}
+      {!isAsking && answer && (
+        <div className="text-foreground dark:text-gray-100 leading-relaxed">
+          {renderFormattedAnswer(answer)}
+        </div>
+      )}
 
       {/* Inline sources, only shown below the lg breakpoint where the sidebar is hidden */}
       <div className="lg:hidden mt-8 pt-6 border-t border-border">

@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import Review from "@/models/Review";
+import mongoose from "mongoose";
 import { embedText } from "@/lib/ai";
 import { sanitizeText, normalizeCategories, validateTextLength } from "@/helpers/fn";
 
@@ -69,6 +70,12 @@ export async function getReviews(userInterests = []) {
 }
 
 export async function getReviewById(reviewId) {
+  if (!mongoose.Types.ObjectId.isValid(reviewId)) {
+    const err = new Error("Review not found.");
+    err.name = "NotFoundError";
+    throw err;
+  }
+
   await dbConnect();
 
   const review = await Review.findOne({ _id: reviewId, status: "visible" })
